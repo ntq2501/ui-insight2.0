@@ -1,77 +1,10 @@
-<script setup lang="ts">
-  import { UserBioBox } from '../../apps/myProfile/overview/style';
-  import { Main } from '../../styled';
-  import SingleChat from '../../apps/chat/SingleChat.vue';
-  import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
-  import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
-  import { ref } from 'vue';
-
-  const title = ref('Thao tác với v-for lồng');
-
-  const codeExample = ref(`<template>
-                  <div class="conditional-rendering">
-                    <p v-for="item in hocSinh" :key="item">
-                      <span>
-                      Tên: {{item.name}} có tuổi là {{item.age}} sống tại {{item.address}}. Đã học các môn sau: 
-                      <span v-for="sub in item.subject" :key="sub">
-                        <span v-html="{{sub}}" ></span>,
-                      </span>
-                      </span>
-                    </p>
-                  </div>
-                </template>
-                <script>
-                export default {
-                  name: "HelloWorld",
-                  data() {
-                    return {
-                      hocSinh: [
-                        {
-                          name: "Nguyen Van A",
-                          age: 18,
-                          address: "Ha Noi",
-                          subject: ["Toan", "Ly", "Hoa"]
-                        },
-                        {
-                          name: "Nguyen Van B",
-                          age: 20,
-                          address: "TPHCM",
-                          subject: ["Toan", "Ly"]
-                        },
-                        {
-                          name: "Nguyen Van C",
-                          age: 22,
-                          address: "Hai Phong",
-                          subject: ["Toan", "Hoa"]
-                        },
-                        {
-                          name: "Nguyen Van D",
-                          age: 18,
-                          address: "Ha Noi",
-                          subject: ["Toan"]
-                        },
-                        {
-                          name: "Nguyen Van E",
-                          age: 26,
-                          address: "Da Nang",
-                          subject: ["Ly", "Hoa"]
-                        }
-                      ]
-                    };
-                  },
-                  methods: {}
-                };
-                </script`);
-</script>
-
 <template>
-
   <Main>
     <a-row :gutter="30">
-      <a-col :xxl="16" :lg="13" :xs="24" :sm="24">
+      <a-col :xxl="16" :lg="13" :xs="24" :sm="24" class="chat-section">
         <SingleChat />
       </a-col>
-      <a-col :xxl="7" :lg="11" :xs="24" :sm="24">
+      <a-col :xxl="7" :lg="11" :xs="24" :sm="24" class="sidebar-section">
         <UserBioBox>
           <sdCards headless>
             <article class="user-info">
@@ -157,40 +90,97 @@
   </Main>
 </template>
 
+<script setup lang="ts">
+  import { UserBioBox } from '../../apps/myProfile/overview/style';
+  import { Main } from '../../styled';
+  import SingleChat from '../../apps/chat/SingleChat.vue';
+  import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
+  import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
+  import { ref } from 'vue';
+
+  const title = ref('Thao tác với v-for lồng');
+
+  const codeExample = ref(`<template>
+                  <div class="conditional-rendering">
+                    <p v-for="item in hocSinh" :key="item">
+                      <span>
+                      Tên: {{item.name}} có tuổi là {{item.age}} sống tại {{item.address}}. Đã học các môn sau: 
+                      <span v-for="sub in item.subject" :key="sub">
+                        <span v-html="{{sub}}" ></span>,
+                      </span>
+                      </span>
+                    </p>
+                  </div>
+                </template>
+                <script>
+                export default {
+                  name: "HelloWorld",
+                  data() {
+                    return {
+                      hocSinh: [
+                        {
+                          name: "Nguyen Van A",
+                          age: 18,
+                          address: "Ha Noi",
+                          subject: ["Toan", "Ly", "Hoa"]
+                        },
+                        {
+                          name: "Nguyen Van B",
+                          age: 20,
+                          address: "TPHCM",
+                          subject: ["Toan", "Ly"]
+                        },
+                        {
+                          name: "Nguyen Van C",
+                          age: 22,
+                          address: "Hai Phong",
+                          subject: ["Toan", "Hoa"]
+                        },
+                        {
+                          name: "Nguyen Van D",
+                          age: 18,
+                          address: "Ha Noi",
+                          subject: ["Toan"]
+                        },
+                        {
+                          name: "Nguyen Van E",
+                          age: 26,
+                          address: "Da Nang",
+                          subject: ["Ly", "Hoa"]
+                        }
+                      ]
+                    };
+                  },
+                  methods: {}
+                };
+                </script`);
+</script>
+
+
 <style scoped>
-.ps {
-  height: 310px;
+
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-7.sidebar-section > div > div),
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section > div > div) {
+  margin-bottom: 0 !important;
 }
-:global(#app > div > div > section > section > section > main > div.lmeiNC > div > div.ant-col.ant-col-xs-24.ant-col-lg-12.ant-col-xxl-15 > div > div > div.ant-card-body > div > form > div > div.chatbox-reply-action.d-flex > a),
-:global(div.ant-col.ant-col-xs-24.ant-col-lg-12.ant-col-xxl-15 > div > div > div.ant-card-body > div > form > div > div.chatbox-reply-input > span) {
-  display: none;
+:global(#app > div > div > section > section > section > main > div) {
+  min-height: unset !important;
+  padding-top: 20px;
+  padding-bottom: 15px;
 }
-:global(.bIdTT .chatbox-reply-form .chatbox-reply-input input) {
-  padding: 0 25px 0 25px;
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-7.sidebar-section > div),
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section > div) {
+  flex: 1;
+  overflow: auto;
 }
-:global(#app > div > div > section > section > section > main > div > div) {
-  margin-top: 30px;
-}
-:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-lg-12.ant-col-xxl-8 > div > div > div > address > div) {
-  height: 300px;
-}
-:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16 > div.bkGFPD.ninjadash-chat-home.ninjadash-chat-home > div > div.ant-card-head) {
-  border-bottom: 1px solid #F1F2F6;
-}
-:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16 > div.bkGFPD.ninjadash-chat-home.ninjadash-chat-home > div > div.ant-card-body > ul > div > li > div > div > div > div > div > div) {
-  padding: 10px 16px;
-}
-:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-lg-13.ant-col-xxl-16 > div > div > div.ant-card-body > ul > div > li > div > div > div > div > div.ninjadash-chatbox__actions) {
-  margin-left: 0;
-  cursor: pointer;
-}
-:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16 > div.bkGFPD.ninjadash-chat-home.ninjadash-chat-home > div > div.ant-card-body > ul > div),
-:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-12.ant-col-xxl-15 > div.bkGFPD.ninjadash-chat-home.ninjadash-chat-home > div > div.ant-card-body > ul > div),
-:global(.bkGFPD.ninjadash-chat-home .ninjadash-chatbox) {
-  height: 380px;
-}
-:global(.bkGFPD .ninjadash-chatbox .ninjadash-chatbox__single:not(:last-child)) {
-  margin-bottom: 16px;
+
+
+.sidebar-section,
+.chat-section {
+  height: calc(100vh - 100px);
+  overflow-y: visible;
+  display: flex; /* Sử dụng flexbox để quản lý layout */
+  flex-direction: column; /* Xếp các phần tử con theo chiều dọc */
 }
 @media screen and (max-width: 768px) {
   :global(.bIdTT .chatbox-reply-form .chatbox-reply-input input) {

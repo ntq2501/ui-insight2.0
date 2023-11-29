@@ -246,9 +246,7 @@ const closeModal = () => {
 </template>
 
 <style scoped>
-.ps {
-  height: 450px;
-}
+
 :global(#app > div > div > section > section > section > main > div > div > div > div > div > div.ant-card-body > div > form > div > div.chatbox-reply-input > span),
 :global(#app > div > div > section > section > section > main > div > div > div > div > div > div.ant-card-body > div > form > div > div.chatbox-reply-action.d-flex > a > span > div) {
   display: none;
