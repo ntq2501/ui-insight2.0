@@ -17,7 +17,7 @@ package-lock.json
 yarn.lock
 /cypress/videos/
 /cypress/screenshots/
-
+.history
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

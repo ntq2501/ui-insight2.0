@@ -344,7 +344,7 @@ const attachment = {
               </span>
               <input
                 @change="handleChange"
-                placeholder="Type your message..."
+                placeholder="Send a message"
                 name="chat"
                 id="chat"
                 :style="{ width: '100%' }"

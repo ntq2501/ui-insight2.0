@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import dayjs from 'dayjs';
+//import dayjs from 'dayjs';
 import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from './style';
 import { useStore } from 'vuex';
 import { computed, onMounted, ref } from 'vue';
 import { message } from 'ant-design-vue';
 import { useRoute } from 'vue-router';
-import EmojiPicker from '@/components/utilities/Emoji.vue';
+//import EmojiPicker from '@/components/utilities/Emoji.vue';
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
 import PropTypes from 'vue-types';
+import ModalRating from "../../dashboard/ModalRating.vue";
 
 const props = defineProps({
   dashboard: PropTypes.bool,
@@ -63,6 +64,8 @@ const handleSubmit = (e: any) => {
   });
   updatedContent.value = [...updatedContent.value, pushcontent];
   inputValue.value = '';
+  console.log(updatedContent);
+  
 };
 
 onMounted(() => dispatch('filterSinglePage', params.id || 'rofiq@gmail.com'));
@@ -104,33 +107,23 @@ const attachment = {
     }
   },
 };
+
+const modalVisible = ref(false);
+const openModalRating = () => {
+  modalVisible.value = true;
+};
+const closeModal = () => {
+  modalVisible.value = false;
+};
 </script>
 
 <template>
+  <ModalRating :visible="modalVisible" :closeModal="closeModal" />
+
   <SingleChatWrapper :class="dashboard ? 'ninjadash-chat-home' : ''">
     <BackShadowEmoji v-if="pickerShow" @click="() => setPickerShow(false)" />
     <sdCards>
-      <template #button>
-        <sdDropdown key="1">
-          <template #overlay>
-            <router-link to="#">
-              <unicon name="users-alt" width="14"></unicon>
-              <span>Create new group</span>
-            </router-link>
-            <router-link to="#">
-              <unicon name="trash-alt" width="14"></unicon>
-              <span>Delete conversation</span>
-            </router-link>
-            <router-link to="#">
-              <unicon name="ban" width="14"></unicon>
-              <span>Block & Report</span>
-            </router-link>
-          </template>
-          <a to="#">
-            <unicon name="ellipsis-h"></unicon>
-          </a>
-        </sdDropdown>
-      </template>
+      
       <template #title>
         <sdHeading as="h5">{{ name }}</sdHeading>
         <p>Hoạt động</p>
@@ -149,23 +142,23 @@ const attachment = {
             :key="time"
             class="ninjadash-chatbox__single"
           >
-            <p v-if="index === 1" class="time-connector text-center text-capitalize">
+            <!-- <p v-if="index === 1" class="time-connector text-center text-capitalize">
               <span>today</span>
-            </p>
+            </p> -->
 
             <div :key="id" :style="{ overflow: 'hidden' }">
               <div :class="email !== me ? 'left' : 'right'">
                 <img v-if="email !== me" :src="`/src/assets/img/chat-author/${img}`" alt="" />
 
                 <div class="ninjadash-chatbox__content">
-                  <sdHeading as="h5" class="ninjadash-chatbox__name">
+                  <!-- <sdHeading as="h5" class="ninjadash-chatbox__name">
                     {{ email !== me ? name : null }}
                     <span>{{
                       dayjs(time).format('MM-DD-YYYY') === dayjs().format('MM-DD-YYYY')
                         ? dayjs(id).format('hh:mm A')
                         : dayjs(id).format('MMM D, YYYY')
                     }}</span>
-                  </sdHeading>
+                  </sdHeading> -->
 
                   <div v-if="email !== me" class="ninjadash-chatbox__contentInner d-flex">
                     <div class="ninjadash-chatbox__message">
@@ -173,66 +166,13 @@ const attachment = {
                     </div>
 
                     <div class="ninjadash-chatbox__actions">
-                      <sdDropdown :action="['hover']" placement="bottom">
-                        <template #overlay>
-                          <div class="ninjadash-chatbox__emoji">
-                            <ul>
-                              <li>
-                                <router-link to="#">
-                                  <span role="img">&#127773;</span>
-                                </router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">
-                                  <span role="img">&#128116;</span>
-                                </router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">
-                                  <span role="img">&#128127;</span>
-                                </router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">
-                                  <span role="img">&#128151;</span>
-                                </router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">
-                                  <span role="img">&#128400;</span>
-                                </router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">
-                                  <unicon name="ellipsis-h"></unicon>
-                                </router-link>
-                              </li>
-                            </ul>
-                          </div>
-                        </template>
-                        <router-link to="#">
-                          <unicon name="smile"></unicon>
-                        </router-link>
-                      </sdDropdown>
-
-                      <sdDropdown :action="['hover']" placement="bottom">
+                      <unicon name="ellipsis-h" width="18" @click="openModalRating"></unicon>
+                      <!-- <sdDropdown :action="['hover']" placement="bottom">
                         <template #overlay>
                           <div class="ninjadash-chatbox__messageControl">
                             <ul>
                               <li>
-                                <router-link to="#">Copy</router-link>
-                              </li>
-                              <li>
                                 <router-link to="#">Edit</router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">Quote</router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">Forward</router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">Remove</router-link>
                               </li>
                             </ul>
                           </div>
@@ -240,78 +180,19 @@ const attachment = {
                         <router-link to="#">
                           <unicon name="ellipsis-h" width="18"></unicon>
                         </router-link>
-                      </sdDropdown>
+                      </sdDropdown> -->
                     </div>
                   </div>
 
                   <div v-else class="ninjadash-chatbox__contentInner d-flex">
-                    <div class="ninjadash-chatbox__actions">
-                      <sdDropdown :action="['hover']" placement="bottom">
-                        <template #overlay>
-                          <div class="ninjadash-chatbox__messageControl">
-                            <ul>
-                              <li>
-                                <router-link to="#">Edit </router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">Copy </router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">Quote</router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">Forward</router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">Remove</router-link>
-                              </li>
-                            </ul>
-                          </div>
-                        </template>
-                        <router-link to="#">
-                          <unicon name="ellipsis-h" width="18"></unicon>
-                        </router-link>
-                      </sdDropdown>
-                      <sdDropdown :action="['hover']" placement="bottom">
-                        <template #overlay>
-                          <div class="ninjadash-chatbox__emoji">
-                            <ul>
-                              <li>
-                                <router-link to="#">&#127773;</router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">&#128116;</router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">&#128127;</router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">&#128151;</router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">&#128400;</router-link>
-                              </li>
-                              <li>
-                                <router-link to="#">
-                                  <unicon name="ellipsis-h"></unicon>
-                                </router-link>
-                              </li>
-                            </ul>
-                          </div>
-                        </template>
-                        <router-link to="#">
-                          <unicon name="smile"></unicon>
-                        </router-link>
-                      </sdDropdown>
-                    </div>
                     <div class="ninjadash-chatbox__message">
                       <MessageList class="message-box">{{ 'đến điện máy xanh mua ti vi được không' }}</MessageList>
                     </div>
                   </div>
 
                   <div v-if="email === me && singleContent.length === index + 1" class="message-seen text-right">
-                    <span class="message-seen__time">Seen 9:20 PM </span>
-                    <img :src="`/src/assets/img/chat-author/${img}`" alt="" />
+                    <!-- <span class="message-seen__time">Seen 9:20 PM </span>
+                    <img :src="`/src/assets/img/chat-author/${img}`" alt="" /> -->
                   </div>
                 </div>
               </div>
@@ -319,7 +200,7 @@ const attachment = {
           </li>
         </perfect-scrollbar>
       </ul>
-      <p v-else class="no-data-text">No data found</p>
+      <p v-else class="no-data-text">Không có dữ liệu</p>
 
       <Footer>
         <form @submit="handleSubmit">
@@ -333,7 +214,7 @@ const attachment = {
               </span>
               <input
                 @change="handleChange"
-                placeholder="Type your message..."
+                placeholder="Send a message"
                 name="chat"
                 id="chat"
                 :style="{ width: '100%' }"
@@ -368,4 +249,12 @@ const attachment = {
 .ps {
   height: 450px;
 }
+:global(#app > div > div > section > section > section > main > div > div > div > div > div > div.ant-card-body > div > form > div > div.chatbox-reply-input > span),
+:global(#app > div > div > section > section > section > main > div > div > div > div > div > div.ant-card-body > div > form > div > div.chatbox-reply-action.d-flex > a > span > div) {
+  display: none;
+}
+:global(.bIdTT .chatbox-reply-form .chatbox-reply-input input) {
+  padding: 0 25px 0 25px;
+}
+
 </style>

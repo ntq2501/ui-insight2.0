@@ -12,7 +12,7 @@ export default [
       {
         name: 'chatBotBaiTap',
         path: 'chatbot/:id',
-        component: () => import('../views/apps/chat/ChatApp.vue'),
+        component: () => import('@/views/dashboard/student/AIChatAssistantStudent.vue'),
       },
       {
         name: 'thongtincanhan',
@@ -22,7 +22,7 @@ export default [
       {
         name: 'demoHocVienDiemDanh',
         path: 'diemdanh',
-        component: () => import('@/views/dashboard/hocVien/DemoHocVienDiemDanh.vue'),
+        component: () => import('@/views/dashboard/student/DemoHocVienDiemDanh.vue'),
       },
       {
         path: 'khoahoc',
