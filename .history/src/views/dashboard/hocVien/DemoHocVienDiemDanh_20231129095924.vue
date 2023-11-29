@@ -1,0 +1,260 @@
+<script setup lang="ts">
+    import { Main } from '../../styled';
+    import { defineAsyncComponent, reactive, ref } from 'vue';
+
+    const dateFormat = ref("DD/MM/YYYY");
+    let valueSelected = ref('');
+    const current1 = ref<number>(1);
+    const  dataSource = [
+          {
+            key: '1',
+            date: '25/11/2023',
+            time: '10:20',
+            status: 'Đi muộn',
+          },
+          {
+            key: '1',
+            date: '28/11/2023',
+            time: '9:30',
+            status: 'Đúng giờ',
+          },
+          {
+            key: '1',
+            date: '29/11/2023',
+            time: '13:30',
+            status: 'Đúng giờ',
+          },
+        ]
+
+    const columns = [
+          {
+            title: 'Ngày',
+            dataIndex: 'date',
+            key: 'date',
+          },
+          {
+            title: 'Ca - Giờ',
+            dataIndex: 'time',
+            key: 'time',
+          },
+          {
+            title: 'Trạng thái',
+            dataIndex: 'status',
+            key: 'status',
+          },
+        ]
+    const optionSelectorStatuses = [
+        {
+            
+        }
+    ]
+
+    const handleChange = (value: any) => {
+    
+    };
+
+    const onChange = (date: any, dateString: any) => {
+        
+    };
+    // const SalesByLocation = defineAsyncComponent(() => import('./demoOne/SalesByLocationTable.vue'));
+    // const pageRoutes = [
+    //     {
+    //         path: '/',
+    //         breadcrumbName: 'Dashboard',
+    //     },
+    //     {
+    //         path: '/hocvien/diemdanh',
+    //         breadcrumbName: 'Demo Six',
+    //     },
+    // ];
+</script>
+
+<template>
+    <div class="Attendance-history">
+        <Main>
+            <a-row>
+                <a-col :xs="24">
+                    <sdCards title="Lịch sử điểm danh">
+                        <a-row>
+                            <a-col class="py-10 pr-15 pr-sm-0" :xxl="6" :xl="6" :lg="6" :md="6" :sm="24" :xs="24">
+                                <p class="card-title">Tình trạng</p>
+                                <SelectWrapperStyle>
+                                    <a-select v-model:value="valueSelected" ref="select" @change="handleChange">
+                                        <a-select-option value="jack">Đúng giờ</a-select-option>
+                                        <a-select-option value="lucy">Muộn giờ</a-select-option>
+                                        <a-select-option value="no">Không đến</a-select-option>
+                                    </a-select>
+                                </SelectWrapperStyle>
+                            </a-col>
+                            <a-col :xxl="12" :xl="12" :lg="12" :md="12" :sm="24" :xs="24">
+                                <a-row justify="space-between" class="datepicker-wapper" >
+                                    <a-col :xxl="12" :xl="12" :lg="12" :md="12" :sm="12" :xs="12" class="px-5 pl-sm-10">
+                                        <p class="card-title">Từ ngày</p>
+                                        <DatePickerWrapper>
+                                            <a-date-picker :format="dateFormat" @change="onChange" class="padding-input-date" />
+                                        </DatePickerWrapper>
+                                    </a-col>
+                                    <a-col :xxl="12" :xl="12" :lg="12" :md="12" :sm="12" :xs="12" class="px-5 pr-sm-10">
+                                        <p class="card-title">Đến ngày</p>
+                                        <DatePickerWrapper>
+                                            <a-date-picker :format="dateFormat" @change="onChange" class="padding-input-date" />
+                                        </DatePickerWrapper>
+                                    </a-col>
+                                </a-row>
+                            </a-col>
+                        
+
+                        </a-row>
+                        <!-- <div class="table-attendance">
+                            <SalesByLocation />
+                        </div> -->
+                        <div>
+                            <a-table :dataSource="dataSource" :columns="columns" pagination="false" />
+                        </div>
+                        <div class="pagination-style">
+                            <a-pagination v-model:current="current1" show-quick-jumper :total="100" @change="onChange" />
+                        </div>
+                    </sdCards>
+
+                </a-col>
+            </a-row>
+        </Main>
+    </div>
+</template>
+
+
+<style scoped>
+.Attendance-history{
+  font-family: Arial, Helvetica, sans-serif;
+}
+.Attendance-history .ant-card-head {
+    border-bottom: 0px;
+}
+.Attendance-history .lmeiNC{
+    padding-top: 20px;
+}
+.Attendance-history .ant-row {
+    padding: 10px 0;
+}
+
+.Attendance-history .custom-card {
+    margin-right: 20px;
+}
+
+.Attendance-history .card-title {
+    margin-bottom: 5px;
+}
+
+.Attendance-history .padding-input-date {
+    padding: 7px;
+}
+.datepicker-wapper {
+    margin: 0 -10px;
+}
+.Attendance-history .lmeiNC .ant-picker {
+    border-color: #E3E6EF !important;
+    width: 100%;
+    margin-right: 10px;
+}
+
+.Attendance-history .ant-picker {
+    border-radius: 4px;
+}
+
+.Attendance-history .custom-card .ant-select {
+    width: 180px;
+}
+.Attendance-history .custom-card .ant-picker {
+    min-width: 180px;
+    width: 100%;
+}
+
+.Attendance-history .table-attendance .dXRjFB .ant-card-body {
+    padding: 0px !important;
+}
+
+.Attendance-history .table-attendance .dXRjFB .ant-card-head {
+    display: none;
+}
+
+.Attendance-history .ant-table-container table>thead>tr:first-child th:first-child,
+.Attendance-history .ant-table-container table>thead>tr:first-child th:last-child {
+    border-top-left-radius: 4px;
+}
+
+.Attendance-history .table-attendance {
+    margin-top: 20px;
+}
+.Attendance-history .ant-table-content{
+    height: 300px;
+    overflow: auto;
+    scrollbar-width: thin;
+}
+
+.Attendance-history .ant-table-content .ant-table-thead {
+    position: sticky;
+    z-index: 1;
+}
+.Attendance-history .table-attendance thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.ant-picker {
+    min-width: unset !important;
+}
+.ant-select {
+    width: 100%;
+}
+.py-10 {
+    padding: 10px 0;
+}
+.pr-15 {
+    padding-right: 15px;
+}
+.px-5 {
+    padding: 0 5px;
+}
+@media screen and (max-width: 600px) {
+    .pr-sm-0 {
+        padding: 0;
+    }
+    .Attendance-history .jWOmVG h1 {
+        font-size: 12px;
+    }
+
+    .Attendance-history .ant-table {
+        font-size: 12px;
+    }
+
+    .Attendance-history .cYeWcq .ant-table {
+        padding: 0px;
+    }
+
+    .Attendance-history .custom-card {
+        margin-bottom: 10px;
+    }
+
+    .Attendance-history .card-title {
+        margin-bottom: 0px;
+    }
+    .pl-sm-10 {
+        padding-left: 10px;
+    }
+    .pr-sm-10 {
+        padding-right: 10px;
+    }
+   
+}
+
+@media screen and (max-width: 400px) {
+    .Attendance-history .custom-card .ant-select-selector {
+        width: 180px;
+    }
+}
+
+.Attendance-history .pagination-style {
+    margin-top: 40px;
+    text-align: right;
+}
+</style>

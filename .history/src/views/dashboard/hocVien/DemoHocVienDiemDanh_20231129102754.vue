@@ -1,6 +1,9 @@
 <script setup lang="ts">
-    import { Main } from '../styled';
+    import { Main, TableWrapper } from '../../styled';
+    import { DataTableStyleWrap } from '../../../components/table/Style';
     import { defineAsyncComponent, reactive, ref } from 'vue';
+    //import { TableWrapper } from '@/views/wizard/styled';
+    //import { Main, TableWrapper } from '../../styled';
 
     const dateFormat = ref("DD/MM/YYYY");
     let valueSelected = ref('');
@@ -8,35 +11,59 @@
     const  dataSource = [
           {
             key: '1',
-            name: 'Mike',
-            age: 32,
-            address: '10 Downing Street',
+            date: '25/11/2023',
+            time: '10:20',
+            status: 'Đi muộn',
           },
           {
             key: '2',
-            name: 'John',
-            age: 42,
-            address: '10 Downing Street',
+            date: '28/11/2023',
+            time: '9:30',
+            status: 'Đúng giờ',
+          },
+          {
+            key: '3',
+            date: '29/11/2023',
+            time: '13:30',
+            status: 'Đúng giờ',
           },
         ]
 
     const columns = [
           {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
+            title: 'Ngày',
+            dataIndex: 'date',
+            key: 'date',
           },
           {
-            title: 'Age',
-            dataIndex: 'age',
-            key: 'age',
+            title: 'Ca - Giờ',
+            dataIndex: 'time',
+            key: 'time',
           },
           {
-            title: 'Address',
-            dataIndex: 'address',
-            key: 'address',
+            title: 'Trạng thái',
+            dataIndex: 'status',
+            key: 'status',
           },
         ]
+
+    const optionSelectorStatuses = [
+        {
+            value: 1,
+            text: "Đúng giờ"
+        },
+        {
+            value: 2,
+            text: "Muộn giờ"
+        },
+        {
+            value: 3,
+            text: "Xin nghỉ"
+        }
+    ]
+    const customLocale = {
+        emptyText: 'Không có dữ liệu',
+    };
 
     const handleChange = (value: any) => {
     
@@ -45,17 +72,6 @@
     const onChange = (date: any, dateString: any) => {
         
     };
-    // const SalesByLocation = defineAsyncComponent(() => import('./demoOne/SalesByLocationTable.vue'));
-    // const pageRoutes = [
-    //     {
-    //         path: '/',
-    //         breadcrumbName: 'Dashboard',
-    //     },
-    //     {
-    //         path: '/hocvien/diemdanh',
-    //         breadcrumbName: 'Demo Six',
-    //     },
-    // ];
 </script>
 
 <template>
@@ -69,11 +85,10 @@
                                 <p class="card-title">Tình trạng</p>
                                 <SelectWrapperStyle>
                                     <a-select v-model:value="valueSelected" ref="select" @change="handleChange">
-                                        <a-select-option value="jack">Đúng giờ</a-select-option>
-                                        <a-select-option value="lucy">Muộn giờ</a-select-option>
-                                        <a-select-option value="no">Không đến</a-select-option>
+                                      <a-select-option v-for="item in optionSelectorStatuses" :key="item.value" :value="item.value">{{ item.text }}</a-select-option>
                                     </a-select>
-                                </SelectWrapperStyle>
+                                  </SelectWrapperStyle>
+                                  
                             </a-col>
                             <a-col :xxl="12" :xl="12" :lg="12" :md="12" :sm="24" :xs="24">
                                 <a-row justify="space-between" class="datepicker-wapper" >
@@ -97,9 +112,22 @@
                         <!-- <div class="table-attendance">
                             <SalesByLocation />
                         </div> -->
-                        <div>
-                            <a-table :dataSource="dataSource" :columns="columns" />
-                        </div>
+                        <DataTableStyleWrap >
+                            <TableWrapper>
+                                <a-table :dataSource="dataSource" :columns="columns" :pagination="false" :locale="customLocale">
+                                    <template #headerCell="{ column }">
+                                        <template v-if="column.key === 'name'">
+                                          <span>
+                                            <smile-outlined />
+                                            Name
+                                          </span>
+                                        </template>
+                                    Q</template>
+                                </a-table>
+                            </TableWrapper>
+
+                        </DataTableStyleWrap>
+                        
                         <div class="pagination-style">
                             <a-pagination v-model:current="current1" show-quick-jumper :total="100" @change="onChange" />
                         </div>

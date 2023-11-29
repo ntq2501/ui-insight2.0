@@ -22,7 +22,7 @@ export default [
       {
         name: 'demoHocVienDiemDanh',
         path: 'diemdanh',
-        component: () => import('@/views/dashboard/hocVien/DemoHocVienDiemDanh.vue'),
+        component: () => import('@/views/dashboard/DemoHocVienDiemDanh.vue'),
       },
       {
         path: 'khoahoc',
