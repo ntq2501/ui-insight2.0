@@ -182,7 +182,7 @@
   padding: 10px;
 }
 :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div) {
-  background: #d9ebff;
+  background: #c6e1ff;
   display: flex;
   flex-direction: column;
   height: 100%;

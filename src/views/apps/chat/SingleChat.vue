@@ -257,4 +257,23 @@ const closeModal = () => {
   padding: 0 25px 0 25px;
 }
 
+:global(.cemhnt .ninjadash-chatbox .ninjadash-chatbox__single .left .message-box) {
+  background-color: #e18b5d;
+  color: #fff;
+}
+:global(.cemhnt .ninjadash-chatbox .ninjadash-chatbox__single .right .message-box) {
+  background-color: #5840FF;
+  color: #fff;
+}
+#chat{
+  background-color: #e6e5e5;
+  font-size: 16px;
+}
+#chat:focus {
+  border: 1px solid #9dbfe6;
+}
+
+#chat:blur {
+  border: none;
+}
 </style>
