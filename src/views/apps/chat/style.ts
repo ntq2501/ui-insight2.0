@@ -146,7 +146,6 @@ const SingleChatWrapper = Styled.div`
     }
 
     .ninjadash-chatbox{
-      height: 495px;
     }
     .chatbox-reply-form {
       .chatbox-reply-input {
@@ -252,7 +251,6 @@ const SingleChatWrapper = Styled.div`
   }
 
   .ninjadash-chatbox{
-    height: 495px;
     overflow-y: auto;
     overflow-x: hidden;
     .time-connector{

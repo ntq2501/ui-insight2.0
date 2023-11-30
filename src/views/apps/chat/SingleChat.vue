@@ -2,14 +2,14 @@
 //import dayjs from 'dayjs';
 import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from './style';
 import { useStore } from 'vuex';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, reactive } from 'vue';
 import { message } from 'ant-design-vue';
 import { useRoute } from 'vue-router';
 //import EmojiPicker from '@/components/utilities/Emoji.vue';
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
 import PropTypes from 'vue-types';
-import ModalRating from "../../dashboard/ModalRating.vue";
+import ModalRating from "../../../components/ModalRating.vue";
 
 const props = defineProps({
   dashboard: PropTypes.bool,
@@ -46,9 +46,8 @@ const onPickerShow = () => {
 const handleChange = (e: any) => {
   inputValue.value = e.target.value;
 };
-
+const contents = ref([]);
 const updatedContent = ref(singleContent.value);
-
 const handleSubmit = (e: any) => {
   e.preventDefault();
   const pushcontent = {
@@ -184,7 +183,7 @@ const closeModal = () => {
                     </div>
                   </div>
 
-                  <div v-else class="ninjadash-chatbox__contentInner d-flex">
+                  <div v-else class="ninjadash-chatbox__contentInner d-flex" >
                     <div class="ninjadash-chatbox__message">
                       <MessageList class="message-box">{{ 'đến điện máy xanh mua ti vi được không' }}</MessageList>
                     </div>
@@ -198,6 +197,7 @@ const closeModal = () => {
               </div>
             </div>
           </li>
+
         </perfect-scrollbar>
       </ul>
       <p v-else class="no-data-text">Không có dữ liệu</p>
@@ -255,4 +255,23 @@ const closeModal = () => {
   padding: 0 25px 0 25px;
 }
 
+:global(.cemhnt .ninjadash-chatbox .ninjadash-chatbox__single .left .message-box) {
+  background-color: #e18b5d;
+  color: #fff;
+}
+:global(.cemhnt .ninjadash-chatbox .ninjadash-chatbox__single .right .message-box) {
+  background-color: #5840FF;
+  color: #fff;
+}
+#chat{
+  background-color: #e6e5e5;
+  font-size: 16px;
+}
+#chat:focus {
+  border: 1px solid #9dbfe6;
+}
+
+#chat:blur {
+  border: none;
+}
 </style>
