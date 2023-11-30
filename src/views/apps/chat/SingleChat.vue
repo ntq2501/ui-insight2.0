@@ -266,6 +266,7 @@ const closeModal = () => {
 #chat{
   background-color: #e6e5e5;
   font-size: 16px;
+  height: 45px;
 }
 #chat:focus {
   border: 1px solid #9dbfe6;
