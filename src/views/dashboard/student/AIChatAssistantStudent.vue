@@ -91,9 +91,9 @@
 </template>
 
 <script setup lang="ts">
-  import { UserBioBox } from '../../apps/myProfile/overview/style';
-  import { Main } from '../../styled';
-  import SingleChat from '../../apps/chat/SingleChat.vue';
+  import { UserBioBox } from '@/views/apps/myProfile/overview/style';
+  import { Main } from '@/views/styled';
+  import SingleChat from '@/views/apps/chat/SingleChat.vue';
   import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
   import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
   import { ref } from 'vue';
