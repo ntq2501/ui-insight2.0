@@ -27,10 +27,7 @@
     props.closeModal();
   };
   
-//   // Nếu bạn muốn làm gì đó khi giá trị của props.visible thay đổi
-  watch(() => props.visible, (newVal) => {
-    // Xử lý khi giá trị của props.visible thay đổi
-  });
+
   </script>
 
 <style scoped>

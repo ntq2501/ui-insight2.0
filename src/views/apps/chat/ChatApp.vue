@@ -23,9 +23,7 @@ const title = ref('Thao tác với v-for lồng');
 </template>
 
 <style scoped>
-.ps {
-  height: 450px;
-}
+
 :global(#app > div > div > section > section > section > main > div > div) {
   margin-top: 30px;
 }
