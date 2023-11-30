@@ -2,7 +2,7 @@
 //import dayjs from 'dayjs';
 import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from './style';
 import { useStore } from 'vuex';
-import { computed, onMounted, ref, reactive } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { message } from 'ant-design-vue';
 import { useRoute } from 'vue-router';
 //import EmojiPicker from '@/components/utilities/Emoji.vue';
@@ -46,7 +46,8 @@ const onPickerShow = () => {
 const handleChange = (e: any) => {
   inputValue.value = e.target.value;
 };
-const contents = ref([]);
+
+const messages = ref<Array<string>>([]);
 const updatedContent = ref(singleContent.value);
 const handleSubmit = (e: any) => {
   e.preventDefault();
@@ -61,9 +62,9 @@ const handleSubmit = (e: any) => {
     id: params.id,
     pushcontent,
   });
+  messages.value.push(inputValue.value);
   updatedContent.value = [...updatedContent.value, pushcontent];
   inputValue.value = '';
-  console.log(updatedContent);
   
 };
 
@@ -114,6 +115,8 @@ const openModalRating = () => {
 const closeModal = () => {
   modalVisible.value = false;
 };
+
+
 </script>
 
 <template>
@@ -193,9 +196,24 @@ const closeModal = () => {
                     <!-- <span class="message-seen__time">Seen 9:20 PM </span>
                     <img :src="`/src/assets/img/chat-author/${img}`" alt="" /> -->
                   </div>
+                 
                 </div>
               </div>
             </div>
+          </li>
+          
+          <li v-for="(item, index) in messages" :key="index" class="ninjadash-chatbox__single">
+            <div :key="index" :style="{ overflow: 'hidden' }">
+              <div class="right">
+              <div class="ninjadash-chatbox__content">
+                <div class="ninjadash-chatbox__contentInner d-flex" >
+                  <div class="ninjadash-chatbox__message">
+                    <MessageList class="message-box">{{ item }}</MessageList>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           </li>
 
         </perfect-scrollbar>
