@@ -229,6 +229,55 @@ export const BannerCarousel = defineComponent({
   },
 });
 
+
+export const TopicInterviewCard = defineComponent({
+  name: 'TopicInterviewCard',
+  props: {
+    backgroundImage: {
+      type: String,
+    },
+    title: {
+      type: String,
+    },
+    desc: {
+      type: String,
+    },
+    btnText: {
+      type: String,
+    },
+    btnClick: {
+      type: Function
+    }
+  },
+  setup(props) {
+    const handleClick = () => {
+      if (props.btnClick) {
+        props.btnClick();
+      }
+    };
+    return () => (
+      <CustomBannerCardWrap>
+        <div
+          class="banner-card-inner theme-2"
+          style={{
+            backgroundImage: `url("${props.backgroundImage}")`,
+          }}
+        >
+          <div class="challenge-card-info">
+            <div>
+              <h2>{props.title}</h2>
+              <p>{props.desc}</p>
+            </div>
+            <sdButton size="lg" type="primary" onClick={handleClick}>
+              {props.btnText}
+            </sdButton>
+          </div>
+        </div>
+      </CustomBannerCardWrap>
+    );
+  },
+});
+
 export const BannerLong = () => {
   return (
     <BannerLongWrap>
