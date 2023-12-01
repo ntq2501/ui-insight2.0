@@ -141,11 +141,11 @@ export default [
   {
     path: '/interview',
     name: 'interview',
-    component: () => import("@/views/dashboard/onlineInterview/TopicInterview.vue"),
+    component: () => import("@/views/dashboard/onlineInterview/Interview.vue"),
   },
   {
-    path: '/interview/:interviewId',
+    path: '/interview/:id',
     name: 'interviewDetail',
-    component: () => import("@/views/dashboard/onlineInterview/DetailInterview.vue"),
+    component: () => import("@/views/dashboard/onlineInterview/InterviewDetail.vue"),
   },
 ];

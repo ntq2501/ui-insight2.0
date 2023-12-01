@@ -7,8 +7,8 @@
     </a-modal>
 </template>
   
-  <script setup lang="ts">
-  import { ref, defineProps, watch } from 'vue';
+<script setup lang="ts">
+  import { ref, defineProps } from 'vue';
   
   const props = defineProps(['visible','closeModal'])
   
@@ -27,8 +27,7 @@
     props.closeModal();
   };
   
-
-  </script>
+</script>
 
 <style scoped>
   :global(body > div:nth-child(10) > div > div.ant-modal-wrap > div) {

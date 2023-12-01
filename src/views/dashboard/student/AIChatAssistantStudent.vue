@@ -91,9 +91,9 @@
 </template>
 
 <script setup lang="ts">
-  import { UserBioBox } from '../../apps/myProfile/overview/style';
-  import { Main } from '../../styled';
-  import SingleChat from '../../apps/chat/SingleChat.vue';
+  import { UserBioBox } from '@/views/apps/myProfile/overview/style';
+  import { Main } from '@/views/styled';
+  import SingleChat from '@/views/apps/chat/SingleChat.vue';
   import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
   import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
   import { ref } from 'vue';
@@ -182,7 +182,7 @@
   padding: 10px;
 }
 :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div) {
-  background: #c6e1ff;
+  background: #d7e8fc;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -196,11 +196,23 @@
 .ps {
   max-height: 300px;
 }
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > article > h1) {
+  margin-bottom: 12px;
+}
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > address),
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > article) {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+}
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > div > h1),
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > address > h1) {
+  margin-bottom: 12px;
+}
 :global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section),
 :global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section) {
 }
 :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > address > div) {
-  max-height: 175px;
+  max-height: 165px;
 }
 :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > div) {
   
@@ -208,8 +220,8 @@
 :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > div:nth-child(3) > div){
   margin-bottom: 15px;
   flex: 1;
-  max-height: calc(100vh - 600px);
-  min-height: 180px !important;  
+  max-height: calc(100vh - 580px);
+  min-height: 150px !important;  
   overflow: auto;
 }
 :global(body) {
@@ -221,7 +233,7 @@
 }
 :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section > div > div > div.ant-card-body > ul > div > li),
 :global(main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section > div > div > div.ant-card-body > ul > div > li) {
-  margin-bottom:18px;
+  margin-bottom:10px;
 }
 :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div),
 :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section > div) {
@@ -285,18 +297,17 @@
 {
   background: #dfdfdf;
   border-radius: 6px;
-
 }
 :global(main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div::-webkit-scrollbar-thumb:hover )
 {
   background: #717070;
 }
-@media screen and (min-width:992px) and (max-width: 1305px) {
+@media screen and (min-width:992px) and (max-width: 1551px) {
   :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > div:nth-child(3) > div){
     margin-bottom: 15px;
     min-height: 0;
     flex: 1;
-    max-height: calc(100vh - 610px);
+    max-height: calc(100vh - 520px);
   }
 }
 

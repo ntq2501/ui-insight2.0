@@ -2,7 +2,7 @@
 //import dayjs from 'dayjs';
 import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from './style';
 import { useStore } from 'vuex';
-import { computed, onMounted, ref, reactive } from 'vue';
+import { computed, watchEffect, onMounted, ref } from 'vue';
 import { message } from 'ant-design-vue';
 import { useRoute } from 'vue-router';
 //import EmojiPicker from '@/components/utilities/Emoji.vue';
@@ -46,7 +46,19 @@ const onPickerShow = () => {
 const handleChange = (e: any) => {
   inputValue.value = e.target.value;
 };
-const contents = ref([]);
+
+const chatContainer = ref(null);
+// const scrollToBottom = () => {
+//   const container = chatContainer.value;
+//   container.scrollTop = container.scrollHeight;
+// };
+onMounted(() => {
+  const container = chatContainer.value;
+  // container.scrollTop = container.scrollHeight;
+  console.log(container);
+})
+
+const messages = ref<Array<string>>([]);
 const updatedContent = ref(singleContent.value);
 const handleSubmit = (e: any) => {
   e.preventDefault();
@@ -61,10 +73,25 @@ const handleSubmit = (e: any) => {
     id: params.id,
     pushcontent,
   });
+  if(inputValue.value.trim() != '') {
+    messages.value.push(inputValue.value);
+  }
   updatedContent.value = [...updatedContent.value, pushcontent];
   inputValue.value = '';
-  console.log(updatedContent);
-  
+  const msgContainer = document.querySelector('#messageContainer');
+  console.log('msgContainer: ', msgContainer);
+  console.log('msgContainer: ', msgContainer != null);
+  if(msgContainer != null) {
+    const lastLiElement = msgContainer.querySelector('li:last-child');
+    console.log('lastLiElement123: ', lastLiElement);
+    
+    if (lastLiElement != null) {
+      console.log('lastLiElement: ', lastLiElement);
+      
+      lastLiElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+ 
 };
 
 onMounted(() => dispatch('filterSinglePage', params.id || 'rofiq@gmail.com'));
@@ -114,6 +141,7 @@ const openModalRating = () => {
 const closeModal = () => {
   modalVisible.value = false;
 };
+
 </script>
 
 <template>
@@ -128,13 +156,14 @@ const closeModal = () => {
         <p>Hoạt động</p>
       </template>
 
-      <ul class="ninjadash-chatbox" v-if="singleContent.length">
+      <ul class="ninjadash-chatbox" v-if="singleContent.length" ref="messageContainer">
         <perfect-scrollbar
           :options="{
             wheelSpeed: 1,
             swipeEasing: true,
             suppressScrollX: true,
           }"
+          
         >
           <li
             v-for="({ time, img, email, content, id }, index) in singleContent"
@@ -193,9 +222,24 @@ const closeModal = () => {
                     <!-- <span class="message-seen__time">Seen 9:20 PM </span>
                     <img :src="`/src/assets/img/chat-author/${img}`" alt="" /> -->
                   </div>
+                 
                 </div>
               </div>
             </div>
+          </li>
+          
+          <li v-for="(item, index) in messages" :key="index" class="ninjadash-chatbox__single">
+            <div :key="index" :style="{ overflow: 'hidden' }">
+              <div class="right">
+              <div class="ninjadash-chatbox__content">
+                <div class="ninjadash-chatbox__contentInner d-flex" >
+                  <div class="ninjadash-chatbox__message">
+                    <MessageList class="message-box">{{ item }}</MessageList>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           </li>
 
         </perfect-scrollbar>
@@ -246,9 +290,7 @@ const closeModal = () => {
 </template>
 
 <style scoped>
-.ps {
-  height: 450px;
-}
+
 :global(#app > div > div > section > section > section > main > div > div > div > div > div > div.ant-card-body > div > form > div > div.chatbox-reply-input > span),
 :global(#app > div > div > section > section > section > main > div > div > div > div > div > div.ant-card-body > div > form > div > div.chatbox-reply-action.d-flex > a > span > div) {
   display: none;
@@ -268,6 +310,7 @@ const closeModal = () => {
 #chat{
   background-color: #e6e5e5;
   font-size: 16px;
+  height: 45px;
 }
 #chat:focus {
   border: 1px solid #9dbfe6;
