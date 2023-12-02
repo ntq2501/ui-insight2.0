@@ -198,7 +198,7 @@
 :global(#app > div > div > section > section > section > main > div > div.ant-row > div > div > div) {
     padding: 16px !important;
 }
-:global(#app > div > div > section > section > section > main) {
-    margin-top: 25px;
+:global(#app > div > div > section > section > section > main > div > div.iTQBHa) {
+    margin-top: 15px;
 }
 </style>

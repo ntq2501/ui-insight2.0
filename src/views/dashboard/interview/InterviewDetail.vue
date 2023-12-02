@@ -78,7 +78,12 @@
         "Liệt kê các loại Directives (chỉ thị) có sẵn trong Vuejs",
         "Vue plugin là gì? ",
         "Vue-loader là gì? ",
-        "Watchers là gì? "
+        "Watchers là gì? ",
+        "Watchers là gì? ",
+        "Vue plugin là gì? ",
+        "Watchers là gì? ",
+        "Liệt kê các loại Directives (chỉ thị) có sẵn trong Vuejs",
+
     ])
 
     const handleItemQuestionClick = (content: string) => {
@@ -98,7 +103,7 @@
         openModalRating();
     };
     
-    const timeRemaining = ref<number>(5); // minutes
+    const timeRemaining = ref<number>(5.1); // minutes
 
     const deadline = Date.now() + timeRemaining.value * 60 * 1000 ;
     
@@ -107,7 +112,7 @@
   
 <style scoped>
   :global(#interview-wrapper > div) {
-    padding-top: 0;
+    padding-top: 20px;
     padding-bottom: 0;
     min-height: unset !important;
   }
