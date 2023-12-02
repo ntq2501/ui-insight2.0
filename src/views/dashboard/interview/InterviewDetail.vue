@@ -1,5 +1,4 @@
 <template>
-
     <div id="interview-wrapper">
         <Main>
           <ModalTimeout :visible="modalVisible" :closeModal="closeModal" />
@@ -48,8 +47,7 @@
           </a-row>
         </Main>
     </div>
-   
-  </template>
+</template>
   
   <script setup lang="ts">
     import { UserBioBox } from '@/views/apps/myProfile/overview/style';
@@ -103,7 +101,7 @@
         openModalRating();
     };
     
-    const timeRemaining = ref<number>(5.1); // minutes
+    const timeRemaining = ref<number>(5); // minutes
 
     const deadline = Date.now() + timeRemaining.value * 60 * 1000 ;
     

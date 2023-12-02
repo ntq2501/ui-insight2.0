@@ -35,10 +35,9 @@
 <script setup lang="ts">
     import {Main} from '@/views/styled';
     import { BreadcrumbWrapperStyle } from "@/views/uiElements/ui-elements-styled";
-    import {CustomBannerCardWrap} from '@/components/banners/Style'
     import InterviewCard from './InterviewCardFeatured.vue';
     import InterviewCardItem from './InterviewCardItem.vue';
-    import { reactive, computed } from 'vue';
+    import { reactive } from 'vue';
 
     const dataBanner = reactive([
         {
