@@ -2,7 +2,7 @@
 import { UserBioBox } from '../myProfile/overview/style';
 import { faFacebookF, faDribbble, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { Main } from '../../styled';
-import SingleChat from './SingleChat.vue';
+import SingleChat from '../chat/SingleChat.vue';
 import { useStore } from 'vuex';
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
 import { ref } from 'vue';

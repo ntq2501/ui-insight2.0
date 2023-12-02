@@ -1,15 +1,14 @@
 <script setup lang="ts">
-//import dayjs from 'dayjs';
-import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from './style';
-import { useStore } from 'vuex';
-import { computed, watchEffect, onMounted, ref } from 'vue';
-import { message } from 'ant-design-vue';
-import { useRoute } from 'vue-router';
-//import EmojiPicker from '@/components/utilities/Emoji.vue';
-import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
-import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
-import PropTypes from 'vue-types';
-import ModalRating from "../../../components/ModalRating.vue";
+import dayjs from "dayjs";
+import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from "./style";
+import { useStore } from "vuex";
+import { computed, onMounted, ref } from "vue";
+import { message } from "ant-design-vue";
+import { useRoute } from "vue-router";
+import EmojiPicker from "@/components/utilities/Emoji.vue";
+import { PerfectScrollbar } from "vue3-perfect-scrollbar";
+import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
+import PropTypes from "vue-types";
 
 const props = defineProps({
   dashboard: PropTypes.bool,
@@ -19,14 +18,16 @@ const { state, dispatch } = useStore();
 const { params } = useRoute();
 const rtl = computed(() => state.ChangeLayoutMode.rtlData);
 const chatData = computed(() => state.chat.privateChat.data);
-const left = computed(() => (!rtl.value ? 'left' : 'right'));
+const left = computed(() => (!rtl.value ? "left" : "right"));
 
-const me = ref('woadud@gmail.com');
+const me = ref("woadud@gmail.com");
 
-const singleContent = computed(() => (chatData.value[0] ? chatData.value[0].content : []));
-const name = 'AI';
+const singleContent = computed(() =>
+  chatData.value[0] ? chatData.value[0].content : []
+);
+const name = "AI";
 
-const inputValue = ref('');
+const inputValue = ref("");
 const fileList = ref([]);
 const fileList2 = ref([]);
 const pickerShow = ref(false);
@@ -47,19 +48,8 @@ const handleChange = (e: any) => {
   inputValue.value = e.target.value;
 };
 
-const chatContainer = ref(null);
-// const scrollToBottom = () => {
-//   const container = chatContainer.value;
-//   container.scrollTop = container.scrollHeight;
-// };
-onMounted(() => {
-  const container = chatContainer.value;
-  // container.scrollTop = container.scrollHeight;
-  console.log(container);
-})
-
-const messages = ref<Array<string>>([]);
 const updatedContent = ref(singleContent.value);
+
 const handleSubmit = (e: any) => {
   e.preventDefault();
   const pushcontent = {
@@ -69,138 +59,188 @@ const handleSubmit = (e: any) => {
     reaction: false,
     email: me.value,
   };
-  dispatch('updatePrivateChat', {
+  dispatch("updatePrivateChat", {
     id: params.id,
     pushcontent,
   });
-  if(inputValue.value.trim() != '') {
-    messages.value.push(inputValue.value);
-  }
   updatedContent.value = [...updatedContent.value, pushcontent];
-  inputValue.value = '';
-  const msgContainer = document.querySelector('#messageContainer');
-  console.log('msgContainer: ', msgContainer);
-  console.log('msgContainer: ', msgContainer != null);
-  if(msgContainer != null) {
-    const lastLiElement = msgContainer.querySelector('li:last-child');
-    console.log('lastLiElement123: ', lastLiElement);
-    
-    if (lastLiElement != null) {
-      console.log('lastLiElement: ', lastLiElement);
-      
-      lastLiElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
- 
+  inputValue.value = "";
 };
 
-onMounted(() => dispatch('filterSinglePage', params.id || 'rofiq@gmail.com'));
+onMounted(() => dispatch("filterSinglePage", params.id || "rofiq@gmail.com"));
 
 const propsData = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  name: "file",
+  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
   headers: {
-    authorization: 'authorization-text',
+    authorization: "authorization-text",
   },
-  listType: 'picture-card',
+  listType: "picture-card",
   onChange(info: any) {
-    if (info.file.status !== 'uploading') {
+    if (info.file.status !== "uploading") {
       fileList.value = info.fileList;
     }
-    if (info.file.status === 'done') {
+    if (info.file.status === "done") {
       message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
+    } else if (info.file.status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
   },
 };
 
 const attachment = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  name: "file",
+  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
   headers: {
-    authorization: 'authorization-text',
+    authorization: "authorization-text",
   },
   onChange(info: any) {
-    if (info.file.status !== 'uploading') {
+    if (info.file.status !== "uploading") {
       // console.log(info.file, info.fileList);
       fileList2.value = info.fileList;
     }
-    if (info.file.status === 'done') {
+    if (info.file.status === "done") {
       message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
+    } else if (info.file.status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
   },
 };
-
-const modalVisible = ref(false);
-const openModalRating = () => {
-  modalVisible.value = true;
-};
-const closeModal = () => {
-  modalVisible.value = false;
-};
-
 </script>
 
 <template>
-  <ModalRating :visible="modalVisible" :closeModal="closeModal" />
-
   <SingleChatWrapper :class="dashboard ? 'ninjadash-chat-home' : ''">
     <BackShadowEmoji v-if="pickerShow" @click="() => setPickerShow(false)" />
     <sdCards>
-      
+      <template #button>
+        <sdDropdown key="1">
+          <template #overlay>
+            <router-link to="#">
+              <unicon name="users-alt" width="14"></unicon>
+              <span>Create new group</span>
+            </router-link>
+            <router-link to="#">
+              <unicon name="trash-alt" width="14"></unicon>
+              <span>Delete conversation</span>
+            </router-link>
+            <router-link to="#">
+              <unicon name="ban" width="14"></unicon>
+              <span>Block & Report</span>
+            </router-link>
+          </template>
+          <a to="#">
+            <unicon name="ellipsis-h"></unicon>
+          </a>
+        </sdDropdown>
+      </template>
       <template #title>
         <sdHeading as="h5">{{ name }}</sdHeading>
         <p>Hoạt động</p>
       </template>
 
-      <ul class="ninjadash-chatbox" v-if="singleContent.length" ref="messageContainer">
+      <ul class="ninjadash-chatbox" v-if="singleContent.length">
         <perfect-scrollbar
           :options="{
             wheelSpeed: 1,
             swipeEasing: true,
             suppressScrollX: true,
           }"
-          
         >
           <li
             v-for="({ time, img, email, content, id }, index) in singleContent"
             :key="time"
             class="ninjadash-chatbox__single"
           >
-            <!-- <p v-if="index === 1" class="time-connector text-center text-capitalize">
+            <p v-if="index === 1" class="time-connector text-center text-capitalize">
               <span>today</span>
-            </p> -->
+            </p>
 
             <div :key="id" :style="{ overflow: 'hidden' }">
               <div :class="email !== me ? 'left' : 'right'">
-                <img v-if="email !== me" :src="`/src/assets/img/chat-author/${img}`" alt="" />
+                <img
+                  v-if="email !== me"
+                  :src="`/src/assets/img/chat-author/${img}`"
+                  alt=""
+                />
 
                 <div class="ninjadash-chatbox__content">
-                  <!-- <sdHeading as="h5" class="ninjadash-chatbox__name">
+                  <sdHeading as="h5" class="ninjadash-chatbox__name">
                     {{ email !== me ? name : null }}
                     <span>{{
-                      dayjs(time).format('MM-DD-YYYY') === dayjs().format('MM-DD-YYYY')
-                        ? dayjs(id).format('hh:mm A')
-                        : dayjs(id).format('MMM D, YYYY')
+                      dayjs(time).format("MM-DD-YYYY") === dayjs().format("MM-DD-YYYY")
+                        ? dayjs(id).format("hh:mm A")
+                        : dayjs(id).format("MMM D, YYYY")
                     }}</span>
-                  </sdHeading> -->
+                  </sdHeading>
 
                   <div v-if="email !== me" class="ninjadash-chatbox__contentInner d-flex">
                     <div class="ninjadash-chatbox__message">
-                      <MessageList class="message-box">{{ 'bạn có mua ti vi không' }}</MessageList>
+                      <MessageList class="message-box">{{
+                        "bạn có mua ti vi không"
+                      }}</MessageList>
                     </div>
 
                     <div class="ninjadash-chatbox__actions">
-                      <unicon name="ellipsis-h" width="18" @click="openModalRating"></unicon>
-                      <!-- <sdDropdown :action="['hover']" placement="bottom">
+                      <sdDropdown :action="['hover']" placement="bottom">
+                        <template #overlay>
+                          <div class="ninjadash-chatbox__emoji">
+                            <ul>
+                              <li>
+                                <router-link to="#">
+                                  <span role="img">&#127773;</span>
+                                </router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">
+                                  <span role="img">&#128116;</span>
+                                </router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">
+                                  <span role="img">&#128127;</span>
+                                </router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">
+                                  <span role="img">&#128151;</span>
+                                </router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">
+                                  <span role="img">&#128400;</span>
+                                </router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">
+                                  <unicon name="ellipsis-h"></unicon>
+                                </router-link>
+                              </li>
+                            </ul>
+                          </div>
+                        </template>
+                        <router-link to="#">
+                          <unicon name="smile"></unicon>
+                        </router-link>
+                      </sdDropdown>
+
+                      <sdDropdown :action="['hover']" placement="bottom">
                         <template #overlay>
                           <div class="ninjadash-chatbox__messageControl">
                             <ul>
                               <li>
+                                <router-link to="#">Copy</router-link>
+                              </li>
+                              <li>
                                 <router-link to="#">Edit</router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">Quote</router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">Forward</router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">Remove</router-link>
                               </li>
                             </ul>
                           </div>
@@ -208,47 +248,99 @@ const closeModal = () => {
                         <router-link to="#">
                           <unicon name="ellipsis-h" width="18"></unicon>
                         </router-link>
-                      </sdDropdown> -->
+                      </sdDropdown>
                     </div>
                   </div>
 
-                  <div v-else class="ninjadash-chatbox__contentInner d-flex" >
+                  <div v-else class="ninjadash-chatbox__contentInner d-flex">
+                    <div class="ninjadash-chatbox__actions">
+                      <sdDropdown :action="['hover']" placement="bottom">
+                        <template #overlay>
+                          <div class="ninjadash-chatbox__messageControl">
+                            <ul>
+                              <li>
+                                <router-link to="#">Edit </router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">Copy </router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">Quote</router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">Forward</router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">Remove</router-link>
+                              </li>
+                            </ul>
+                          </div>
+                        </template>
+                        <router-link to="#">
+                          <unicon name="ellipsis-h" width="18"></unicon>
+                        </router-link>
+                      </sdDropdown>
+                      <sdDropdown :action="['hover']" placement="bottom">
+                        <template #overlay>
+                          <div class="ninjadash-chatbox__emoji">
+                            <ul>
+                              <li>
+                                <router-link to="#">&#127773;</router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">&#128116;</router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">&#128127;</router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">&#128151;</router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">&#128400;</router-link>
+                              </li>
+                              <li>
+                                <router-link to="#">
+                                  <unicon name="ellipsis-h"></unicon>
+                                </router-link>
+                              </li>
+                            </ul>
+                          </div>
+                        </template>
+                        <router-link to="#">
+                          <unicon name="smile"></unicon>
+                        </router-link>
+                      </sdDropdown>
+                    </div>
                     <div class="ninjadash-chatbox__message">
-                      <MessageList class="message-box">{{ 'đến điện máy xanh mua ti vi được không' }}</MessageList>
+                      <MessageList class="message-box">{{
+                        "đến điện máy xanh mua ti vi được không"
+                      }}</MessageList>
                     </div>
                   </div>
 
-                  <div v-if="email === me && singleContent.length === index + 1" class="message-seen text-right">
-                    <!-- <span class="message-seen__time">Seen 9:20 PM </span>
-                    <img :src="`/src/assets/img/chat-author/${img}`" alt="" /> -->
-                  </div>
-                 
-                </div>
-              </div>
-            </div>
-          </li>
-          
-          <li v-for="(item, index) in messages" :key="index" class="ninjadash-chatbox__single">
-            <div :key="index" :style="{ overflow: 'hidden' }">
-              <div class="right">
-              <div class="ninjadash-chatbox__content">
-                <div class="ninjadash-chatbox__contentInner d-flex" >
-                  <div class="ninjadash-chatbox__message">
-                    <MessageList class="message-box">{{ item }}</MessageList>
+                  <div
+                    v-if="email === me && singleContent.length === index + 1"
+                    class="message-seen text-right"
+                  >
+                    <span class="message-seen__time">Seen 9:20 PM </span>
+                    <img :src="`/src/assets/img/chat-author/${img}`" alt="" />
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           </li>
-
         </perfect-scrollbar>
       </ul>
-      <p v-else class="no-data-text">Không có dữ liệu</p>
+      <p v-else class="no-data-text">No data found</p>
 
       <Footer>
         <form @submit="handleSubmit">
-          <div :class="`chatbox-reply-form d-flex ${fileList.length && 'hasImage'} ${fileList2.length && 'hasFile'}`">
+          <div
+            :class="`chatbox-reply-form d-flex ${fileList.length && 'hasImage'} ${
+              fileList2.length && 'hasFile'
+            }`"
+          >
             <div class="chatbox-reply-input">
               <span class="smile-icon">
                 <EmojiPicker :emojiClick="onEmojiClick" v-if="pickerShow" />
@@ -258,7 +350,7 @@ const closeModal = () => {
               </span>
               <input
                 @change="handleChange"
-                placeholder="Send a message"
+                placeholder="Type your message..."
                 name="chat"
                 id="chat"
                 :style="{ width: '100%' }"
@@ -290,33 +382,7 @@ const closeModal = () => {
 </template>
 
 <style scoped>
-
-:global(#app > div > div > section > section > section > main > div > div > div > div > div > div.ant-card-body > div > form > div > div.chatbox-reply-input > span),
-:global(#app > div > div > section > section > section > main > div > div > div > div > div > div.ant-card-body > div > form > div > div.chatbox-reply-action.d-flex > a > span > div) {
-  display: none;
-}
-:global(.bIdTT .chatbox-reply-form .chatbox-reply-input input) {
-  padding: 0 25px 0 25px;
-}
-
-:global(.cemhnt .ninjadash-chatbox .ninjadash-chatbox__single .left .message-box) {
-  background-color: #e18b5d;
-  color: #fff;
-}
-:global(.cemhnt .ninjadash-chatbox .ninjadash-chatbox__single .right .message-box) {
-  background-color: #5840FF;
-  color: #fff;
-}
-#chat{
-  background-color: #e6e5e5;
-  font-size: 16px;
-  height: 45px;
-}
-#chat:focus {
-  border: 1px solid #9dbfe6;
-}
-
-#chat:blur {
-  border: none;
+.ps {
+  height: 450px;
 }
 </style>

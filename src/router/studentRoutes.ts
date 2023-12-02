@@ -20,11 +20,6 @@ export default [
         component: () => import('../views/dashboard/DemoThongTinCaNhan.vue'),
       },
       {
-        name: 'demoHocVienDiemDanh',
-        path: 'diemdanh',
-        component: () => import('@/views/dashboard/student/DemoHocVienDiemDanh.vue'),
-      },
-      {
         path: 'khoahoc',
         name: 'demoKhoaHocCuaToi',
         component: () => import('@/views/dashboard/DemoKhoaHocCuaToi.vue'),
