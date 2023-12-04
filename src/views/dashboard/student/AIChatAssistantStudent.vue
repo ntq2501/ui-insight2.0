@@ -1,11 +1,11 @@
 <template>
   <Main>
     <a-row :gutter="30">
-      <a-col :xxl="16" :xl="16" :lg="13" :md="14" :xs="24" :sm="24" class="chat-section">
+      <a-col :xxl="16" :xl="14" :lg="13" :md="13" :xs="24" :sm="24" class="chat-section">
           <SingleChat />
       </a-col>
       
-      <a-col :xxl="8" :xl="8" :lg="11" :md="10" :xs="24" :sm="24" class="sidebar-section">
+      <a-col :xxl="8" :lg="11" :xs="24" :sm="24" class="sidebar-section">
           <UserBioBox>
             <sdCards headless>
               <article class="user-info">
@@ -93,7 +93,7 @@
 <script setup lang="ts">
   import { UserBioBox } from '@/views/apps/myProfile/overview/style';
   import { Main } from '@/views/styled';
-  import SingleChat from '@/views/apps/chat/SingleChat.vue';
+  import SingleChat from '@/views/dashboard/SingleChat.vue';
   import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
   import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
   import { ref } from 'vue';
@@ -214,8 +214,8 @@
 :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > address > div) {
   max-height: 165px;
 }
-:global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > div) {
-  
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section > div > div > div.ant-card-body > ul > div > li:nth-child(1)) {
+  margin-top: 6px;
 }
 :global( main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-11.ant-col-xxl-8.sidebar-section > div > div > div > div:nth-child(3) > div){
   margin-bottom: 15px;
@@ -265,7 +265,7 @@
 
 :global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section > div > div > div.ant-card-body > ul > div) {
   flex: 1;
-  height: calc(100vh - 310px);
+  height: calc(100vh - 270px);
 }
 :global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section) {
   display: flex;
@@ -279,6 +279,7 @@
   display: flex !important;
   flex-direction: column;
   justify-content: end;
+  padding-top: 0 !important;
 }
 :global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section > div > div > div.ant-card-body > ul){
   flex: 1;

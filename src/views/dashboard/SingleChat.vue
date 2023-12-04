@@ -1,18 +1,18 @@
 <script setup lang="ts">
 //import dayjs from 'dayjs';
-import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from './style';
+import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from '../apps/chat/style';
 import { useStore } from 'vuex';
-import { computed, watchEffect, onMounted, ref } from 'vue';
+import { computed, nextTick, watch, onMounted, ref } from 'vue';
 import { message } from 'ant-design-vue';
 import { useRoute } from 'vue-router';
-//import EmojiPicker from '@/components/utilities/Emoji.vue';
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
 import PropTypes from 'vue-types';
-import ModalRating from "../../../components/ModalRating.vue";
+import ModalRating from "./interview/ModalTimeout.vue";
 
 const props = defineProps({
   dashboard: PropTypes.bool,
+  selectedContent: PropTypes.string,
 });
 
 const { state, dispatch } = useStore();
@@ -30,35 +30,36 @@ const inputValue = ref('');
 const fileList = ref([]);
 const fileList2 = ref([]);
 const pickerShow = ref(false);
-
-const setPickerShow = (value: any) => {
-  pickerShow.value = value;
-};
-
-const onEmojiClick = (emojiObject: any) => {
-  return (inputValue.value = inputValue.value + emojiObject);
-};
-
-const onPickerShow = () => {
-  pickerShow.value = !pickerShow.value;
-};
+const messageContainer = ref<HTMLElement | null>(null);
 
 const handleChange = (e: any) => {
   inputValue.value = e.target.value;
 };
 
-const messageContainer = ref<HTMLDivElement | null>(null)
-const handleScrollBottom = () => {
-  if (messageContainer.value) {
-    const lastLiElement = messageContainer.value.querySelector('div.ps');
-    console.log('lastLiElement: ', lastLiElement?.scrollHeight);
-    console.log('lastLiElement: ', lastLiElement?.scrollTop);
-    //lastLiElement?.scrollTop = lastLiElement?.scrollHeight
+onMounted(() => {
+  scrollToBottom();
+});
+
+const scrollToBottom = async () => {
+  await nextTick();
+  const container = messageContainer.value;
+  if (container) {
+    const divScrollElement = container.querySelector('div.ps');
+    if(divScrollElement) {
+      divScrollElement.scrollTop = divScrollElement.scrollHeight;
+    }
   }
-}
+};
 
 const messages = ref<Array<string>>([]);
 const updatedContent = ref(singleContent.value);
+
+watch(() => {
+  if (props.selectedContent !== null && props.selectedContent !== '') {
+    messages.value.push(props.selectedContent);
+    scrollToBottom();
+  }
+});
 
 const handleSubmit = (e: any) => {
   e.preventDefault();
@@ -78,47 +79,7 @@ const handleSubmit = (e: any) => {
   }
   updatedContent.value = [...updatedContent.value, pushcontent];
   inputValue.value = '';
-  handleScrollBottom();
-};
-
-onMounted(() => dispatch('filterSinglePage', params.id || 'rofiq@gmail.com'));
-
-const propsData = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  listType: 'picture-card',
-  onChange(info: any) {
-    if (info.file.status !== 'uploading') {
-      fileList.value = info.fileList;
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-
-const attachment = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info: any) {
-    if (info.file.status !== 'uploading') {
-      // console.log(info.file, info.fileList);
-      fileList2.value = info.fileList;
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
+  scrollToBottom();
 };
 
 const modalVisible = ref(false);
@@ -143,13 +104,14 @@ const closeModal = () => {
         <p>Hoạt động</p>
       </template>
 
-      <ul class="ninjadash-chatbox" v-if="singleContent.length" ref="messageContainer" id="messageContainer">
+      <ul class="ninjadash-chatbox" v-if="singleContent.length" ref="messageContainer">
         <perfect-scrollbar
           :options="{
             wheelSpeed: 1,
             swipeEasing: true,
             suppressScrollX: true,
           }"
+          
         >
           <li
             v-for="({ time, img, email, content, id }, index) in singleContent"
@@ -165,15 +127,6 @@ const closeModal = () => {
                 <img v-if="email !== me" :src="`/src/assets/img/chat-author/${img}`" alt="" />
 
                 <div class="ninjadash-chatbox__content">
-                  <!-- <sdHeading as="h5" class="ninjadash-chatbox__name">
-                    {{ email !== me ? name : null }}
-                    <span>{{
-                      dayjs(time).format('MM-DD-YYYY') === dayjs().format('MM-DD-YYYY')
-                        ? dayjs(id).format('hh:mm A')
-                        : dayjs(id).format('MMM D, YYYY')
-                    }}</span>
-                  </sdHeading> -->
-
                   <div v-if="email !== me" class="ninjadash-chatbox__contentInner d-flex">
                     <div class="ninjadash-chatbox__message">
                       <MessageList class="message-box">{{ 'bạn có mua ti vi không' }}</MessageList>
@@ -181,20 +134,6 @@ const closeModal = () => {
 
                     <div class="ninjadash-chatbox__actions">
                       <unicon name="ellipsis-h" width="18" @click="openModalRating"></unicon>
-                      <!-- <sdDropdown :action="['hover']" placement="bottom">
-                        <template #overlay>
-                          <div class="ninjadash-chatbox__messageControl">
-                            <ul>
-                              <li>
-                                <router-link to="#">Edit</router-link>
-                              </li>
-                            </ul>
-                          </div>
-                        </template>
-                        <router-link to="#">
-                          <unicon name="ellipsis-h" width="18"></unicon>
-                        </router-link>
-                      </sdDropdown> -->
                     </div>
                   </div>
 
@@ -204,11 +143,6 @@ const closeModal = () => {
                     </div>
                   </div>
 
-                  <div v-if="email === me && singleContent.length === index + 1" class="message-seen text-right">
-                    <!-- <span class="message-seen__time">Seen 9:20 PM </span>
-                    <img :src="`/src/assets/img/chat-author/${img}`" alt="" /> -->
-                  </div>
-                 
                 </div>
               </div>
             </div>
