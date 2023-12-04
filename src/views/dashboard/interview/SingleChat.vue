@@ -1,6 +1,6 @@
 <script setup lang="ts">
 //import dayjs from 'dayjs';
-import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from '../apps/chat/style';
+import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from '../../apps/chat/style';
 import { useStore } from 'vuex';
 import { computed, nextTick, watch, onMounted, ref } from 'vue';
 import { message } from 'ant-design-vue';
@@ -8,7 +8,7 @@ import { useRoute } from 'vue-router';
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
 import PropTypes from 'vue-types';
-import ModalRating from "./interview/ModalTimeout.vue";
+import ModalRating from "../interview/ModalTimeout.vue";
 
 const props = defineProps({
   dashboard: PropTypes.bool,

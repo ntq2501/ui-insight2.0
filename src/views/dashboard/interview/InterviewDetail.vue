@@ -1,7 +1,7 @@
 <template>
     <div id="interview-wrapper">
         <Main>
-          <ModalTimeout :visible="modalVisible" :closeModal="closeModal" />
+          <!-- <ModalTimeout :visible="modalTimeOutVisible" :closeModal="closeModal" /> -->
           <a-row :gutter="30">
             <a-col :xxl="16" :xl="15" :lg="15" :md="14" :xs="24" :sm="24" class="chat-section">
                 <SingleChat :selectedContent="selectedContent" />
@@ -52,7 +52,7 @@
   <script setup lang="ts">
     import { UserBioBox } from '@/views/apps/myProfile/overview/style';
     import { Main } from '@/views/styled';
-    import SingleChat from '@/views/dashboard/SingleChat.vue';
+    import SingleChat from '@/views/dashboard/interview/SingleChat.vue';
     import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
     import { ref, onMounted, reactive  } from 'vue';
     import ModalTimeout from '@/views/dashboard/interview/ModalTimeout.vue';
@@ -88,21 +88,19 @@
       selectedContent.value = content;
     }
 
-    const modalVisible = ref(false);
+    const modalTimeOutVisible = ref(false);
     const openModalRating = () => {
-      modalVisible.value = true;
+      modalTimeOutVisible.value = true;
     };
     const closeModal = () => {
-      modalVisible.value = false;
+      modalTimeOutVisible.value = false;
     };
 
     const onFinish = () => {
-        console.log('finished!');
-        openModalRating();
+      openModalRating();
     };
     
-    const timeRemaining = ref<number>(5); // minutes
-
+    const timeRemaining = ref<number>(50); // minutes
     const deadline = Date.now() + timeRemaining.value * 60 * 1000 ;
     
 </script>
