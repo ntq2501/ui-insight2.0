@@ -1,26 +1,25 @@
 <template>
-    <a-modal title="Notification" @ok="handleOk" :footer="null" :header="null" :closable="false" :mask-closable="true"  :visible="visible" :ok-text="okText">
+    <a-modal title="Thông báo" @ok="handleOk" :footer="null" :header="null" :closable="false" :mask-closable="true"  :visible="visibleModalTimeout" :ok-text="okText">
       <template #default>
-        <p>Finished !</p>
+        <p>Kết thúc !</p>
         <button id="btnOK" @click="handleOk">OK</button>
       </template>
     </a-modal>
-   
 </template>
   
 <script setup lang="ts">
   import router from '@/router';
   import { defineProps } from 'vue';
 
-  const props = defineProps(['visible','closeModal'])
+  const props = defineProps(['visibleModalTimeout','closeModalTimeOut'])
   const okText = 'OK';
   
   const handleOk = () => {
-    props.closeModal();
-    router.push('/interview');
+    props.closeModalTimeOut();
+    //router.push('/interview');
   };
   const handleCancel = () => {
-    props.closeModal();
+    props.closeModalTimeOut();
   };
 </script>
 

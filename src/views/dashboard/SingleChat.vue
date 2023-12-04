@@ -1,6 +1,6 @@
 <script setup lang="ts">
 //import dayjs from 'dayjs';
-import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from '../../apps/chat/style';
+import { SingleChatWrapper, MessageList, BackShadowEmoji, Footer } from '../apps/chat/style';
 import { useStore } from 'vuex';
 import { computed, nextTick, watch, onMounted, ref } from 'vue';
 import { message } from 'ant-design-vue';
@@ -8,7 +8,7 @@ import { useRoute } from 'vue-router';
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
 import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
 import PropTypes from 'vue-types';
-import ModalRating from "../interview/ModalTimeout.vue";
+import ModalRating from "@/views/dashboard/ModalRating.vue";
 
 const props = defineProps({
   dashboard: PropTypes.bool,
@@ -96,9 +96,7 @@ const closeModal = () => {
   <ModalRating :visible="modalVisible" :closeModal="closeModal" />
 
   <SingleChatWrapper :class="dashboard ? 'ninjadash-chat-home' : ''">
-    <BackShadowEmoji v-if="pickerShow" @click="() => setPickerShow(false)" />
     <sdCards>
-      
       <template #title>
         <sdHeading as="h5">{{ name }}</sdHeading>
         <p>Hoạt động</p>
@@ -166,12 +164,6 @@ const closeModal = () => {
         <form @submit="handleSubmit">
           <div :class="`chatbox-reply-form d-flex ${fileList.length && 'hasImage'} ${fileList2.length && 'hasFile'}`">
             <div class="chatbox-reply-input">
-              <span class="smile-icon">
-                <EmojiPicker :emojiClick="onEmojiClick" v-if="pickerShow" />
-                <router-link @click="onPickerShow" to="#">
-                  <unicon name="smile" width="24"></unicon>
-                </router-link>
-              </span>
               <input
                 @change="handleChange"
                 placeholder="Send a message"
@@ -182,18 +174,6 @@ const closeModal = () => {
               />
             </div>
             <div class="chatbox-reply-action d-flex">
-              <a to="#">
-                <a-upload v-bind="propsData">
-                  <unicon name="camera" width="18"></unicon>
-                </a-upload>
-              </a>
-              <a to="#">
-                <span class="ant-upload-picture-card-wrapper">
-                  <div class="ant-upload-select">
-                    <unicon name="paperclip" width="18"></unicon>
-                  </div>
-                </span>
-              </a>
               <sdButton @click="handleSubmit" type="primary" class="btn-send">
                 <unicon name="message" width="18"></unicon>
               </sdButton>

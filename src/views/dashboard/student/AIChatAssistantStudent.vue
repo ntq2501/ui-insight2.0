@@ -93,7 +93,7 @@
 <script setup lang="ts">
   import { UserBioBox } from '@/views/apps/myProfile/overview/style';
   import { Main } from '@/views/styled';
-  import SingleChat from '@/views/dashboard/student/SingleChat.vue';
+  import SingleChat from '@/views/dashboard/SingleChat.vue';
   import { PerfectScrollbar } from 'vue3-perfect-scrollbar';
   import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
   import { ref } from 'vue';

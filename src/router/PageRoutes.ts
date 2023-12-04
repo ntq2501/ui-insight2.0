@@ -138,14 +138,15 @@ export default [
     name: 'thuthach',
     component: () => import("@/views/dashboard/Challenge.vue"),
   },
+ 
   {
     path: '/interview',
     name: 'interview',
-    component: () => import("@/views/dashboard/interview/Interview.vue"),
+    component: () => import("@/views/dashboard/interview/TopicInterview.vue"),
   },
   {
     path: '/interview/:id',
     name: 'interviewDetail',
-    component: () => import("@/views/dashboard/interview/InterviewDetail.vue"),
+    component: () => import("@/views/dashboard/interview/Interview.vue"),
   },
 ];
