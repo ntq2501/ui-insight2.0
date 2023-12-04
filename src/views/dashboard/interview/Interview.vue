@@ -16,12 +16,17 @@
                         </sdHeading>
                         <a-statistic-countdown :value="deadline" :format="'mm:ss'" @finish="onFinish" />
                       </article>
-
+                      
                       <article class="user-info">
-                          <sdHeading as="h5" class="user-info__title">
-                            <p class="right-sidebar-title">Câu hỏi phổ biến </p>
-                          </sdHeading>
-                          <a-tabs v-model:activeKey="activeKey" @change="handleChangeTab">
+                        <a-select v-model:value="selectedValue" style="width: 120px" ref="select" @change="handleChange">
+                          <a-select-option value="1">Câu hỏi phổ biến</a-select-option>
+                          <a-select-option value="2">Câu hỏi mới nhất</a-select-option>
+                          <a-select-option value="3">Câu hỏi liên quan</a-select-option>
+                        </a-select>
+                      </article>
+
+                      <article class="user-info" v-if="selectedValue === '1'">
+                          <a-tabs v-model:activeKey="activeKey">
                             <a-tab-pane key="1" tab="Cơ bản">
                               <TabListQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
                             </a-tab-pane>
@@ -34,10 +39,7 @@
                           </a-tabs>
                       </article>
 
-                      <article class="user-info">
-                        <sdHeading as="h5" class="user-info__title">
-                          <p class="right-sidebar-title" >Câu hỏi mới nhất </p>
-                        </sdHeading>
+                      <article class="user-info" v-if="selectedValue === '2'">
                         <a-tabs v-model:activeKey2="activeKey2">
                           <a-tab-pane key="4" tab="Cơ bản">
                             <TabListQuestion :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
@@ -51,10 +53,7 @@
                         </a-tabs>
                       </article>
 
-                      <article class="user-info">
-                        <sdHeading as="h5" class="user-info__title">
-                          <p class="right-sidebar-title">Top câ </p>
-                        </sdHeading>
+                      <article class="user-info" v-if="selectedValue === '3'">
                         <a-tabs v-model:activeKey3="activeKey3">
                           <a-tab-pane key="4" tab="Cơ bản">
                             <TabListQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
@@ -86,6 +85,7 @@
     import ModalTimeout from '@/views/dashboard/interview/ModalTimeout.vue';
     import TabListQuestion from '@/views/dashboard/interview/ListItemQuestion.vue';
 
+    const selectedValue = ref('1');
     const selectedContent = ref('');
     const activeKey = ref('1');
     const activeKey2 = ref('4');
@@ -95,7 +95,9 @@
         activeKey2.value = '4';
         activeKey3.value = '7';
     });
-    
+    const handleChange = (value: any) => {
+      console.log(`selected ${value}`);
+    };
     const dataBasicQuestion = reactive([
       "Prop component là gì? ",
       "Mô tả lifecycle hooks trong Vuejs",
@@ -174,8 +176,15 @@
     margin-top: 0;
   }
   :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-9.ant-col-xxl-8.sidebar-section > div > div > div > article) {
-    padding-bottom: 16px;
-    margin-bottom: 16px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-9.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(2)) {
+    border: none;
+    margin-bottom: 0;
+  }
+  :global(#rc-tabs-5-panel-1 > div > div.ant-spin-nested-loading > div > ul > li:nth-child(1)) {
+    padding-top: 0;
   }
   :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-9.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(1)) {
     display: flex;
@@ -229,9 +238,17 @@
     font-size: 22px;
     font-weight: 500;
   }
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(2) > div) {
+    width: 100% !important;
+  }
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(2) > div > div > span.ant-select-selection-item) {
+    font-size: 18px;
+    font-weight: 500;
+    color: #21498c;
+  }
 
   :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
-    font-size:17px
+    font-size:16px
   }
   /* css pagination */
   :global(.ant-pagination-disabled button) {
@@ -323,6 +340,15 @@
   }
   :global(body > div:nth-child(11) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-body > ul) {
     margin-bottom: 15px;
+  }
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
+    color: #bbbbbb;
+  }
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-tab.ant-tabs-tab-active > div) {
+    color: #21498c;
+  }
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-ink-bar.ant-tabs-ink-bar-animated) {
+    background: #21498c;
   }
   @media screen and (max-width: 768px) {
     :global(.bIdTT .chatbox-reply-form .chatbox-reply-input input) {
