@@ -5,7 +5,7 @@
           <SingleChat />
       </a-col>
       
-      <a-col :xxl="8" :lg="11" :xs="24" :sm="24" class="sidebar-section">
+      <a-col :xxl="8" :xl="10" :lg="11" :md="11" :xs="24" :sm="24" class="sidebar-section">
           <UserBioBox>
             <sdCards headless>
               <article class="user-info">

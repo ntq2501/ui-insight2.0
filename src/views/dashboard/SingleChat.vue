@@ -111,17 +111,13 @@ const closeModal = () => {
             swipeEasing: true,
             suppressScrollX: true,
           }"
-          
         >
           <li
             v-for="({ time, img, email, content, id }, index) in singleContent"
             :key="time"
             class="ninjadash-chatbox__single"
           >
-            <!-- <p v-if="index === 1" class="time-connector text-center text-capitalize">
-              <span>today</span>
-            </p> -->
-
+        
             <div :key="id" :style="{ overflow: 'hidden' }">
               <div :class="email !== me ? 'left' : 'right'">
                 <img v-if="email !== me" :src="`/src/assets/img/chat-author/${img}`" alt="" />
