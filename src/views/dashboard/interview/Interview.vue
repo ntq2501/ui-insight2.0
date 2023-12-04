@@ -246,7 +246,9 @@
     font-weight: 500;
     color: #21498c;
   }
-
+  :global( div > div.ant-list-pagination > ul > li.ant-pagination-item.ant-pagination-item-active > a) {
+    background: #21498c;
+  }
   :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
     font-size:16px
   }
