@@ -3,11 +3,11 @@
         <Main>
           <ModalTimeout :visible="modalTimeOutVisible" :closeModalTimeOut="closeModalTimeOut" />
           <a-row :gutter="30">
-            <a-col :xxl="16" :xl="16" :lg="15" :md="14" :xs="24" :sm="24" class="chat-section">
+            <a-col :xxl="16" :xl="15" :lg="15" :md="14" :xs="24" :sm="24" class="chat-section">
                 <SingleChat :selectedContent="selectedContent" />
             </a-col>
             
-            <a-col :xxl="8" :xl="8" :lg="9" :md="10" :xs="24" :sm="24" class="sidebar-section">
+            <a-col :xxl="8" :xl="9" :lg="9" :md="10" :xs="24" :sm="24" class="sidebar-section">
                 <UserBioBox>
                   <sdCards headless>
                       <article class="user-info" >
@@ -28,13 +28,13 @@
                       <article class="user-info" v-if="selectedValue === '1'">
                           <a-tabs v-model:activeKey="activeKey">
                             <a-tab-pane key="1" tab="Cơ bản">
-                              <TabListQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
+                              <ListItemQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
                             </a-tab-pane>
                             <a-tab-pane key="2" tab="Nâng cao">
-                              <TabListQuestion  :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
+                              <ListItemQuestion  :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
                             </a-tab-pane>
                             <a-tab-pane key="3" tab="Chuyên gia">
-                              <TabListQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
+                              <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
                             </a-tab-pane>
                           </a-tabs>
                       </article>
@@ -42,27 +42,27 @@
                       <article class="user-info" v-if="selectedValue === '2'">
                         <a-tabs v-model:activeKey2="activeKey2">
                           <a-tab-pane key="4" tab="Cơ bản">
-                            <TabListQuestion :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            <ListItemQuestion :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
                           </a-tab-pane>
                           <a-tab-pane key="5" tab="Nâng cao">
-                            <TabListQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
                           </a-tab-pane>
                           <a-tab-pane key="6" tab="Chuyên gia">
-                            <TabListQuestion  :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            <ListItemQuestion  :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
                           </a-tab-pane>
                         </a-tabs>
                       </article>
 
                       <article class="user-info" v-if="selectedValue === '3'">
                         <a-tabs v-model:activeKey3="activeKey3">
-                          <a-tab-pane key="4" tab="Cơ bản">
-                            <TabListQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
+                          <a-tab-pane key="7" tab="Cơ bản">
+                            <ListItemQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
                           </a-tab-pane>
-                          <a-tab-pane key="5" tab="Nâng cao">
-                            <TabListQuestion  :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
+                          <a-tab-pane key="8" tab="Nâng cao">
+                            <ListItemQuestion  :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
                           </a-tab-pane>
-                          <a-tab-pane key="6" tab="Chuyên gia">
-                            <TabListQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
+                          <a-tab-pane key="9" tab="Chuyên gia">
+                            <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
                           </a-tab-pane>
                         </a-tabs>
                       </article>
@@ -83,7 +83,7 @@
     import 'vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css';
     import { ref, onMounted, reactive, inject ,watch } from 'vue';
     import ModalTimeout from '@/views/dashboard/interview/ModalTimeout.vue';
-    import TabListQuestion from '@/views/dashboard/interview/ListItemQuestion.vue';
+    import ListItemQuestion from '@/views/dashboard/interview/ListItemQuestion.vue';
 
     const selectedValue = ref('1');
     const selectedContent = ref('');
@@ -99,51 +99,86 @@
       console.log(`selected ${value}`);
     };
     const dataBasicQuestion = reactive([
-      "Prop component là gì? ",
-      "Mô tả lifecycle hooks trong Vuejs",
-      "Trong Vuejs, reactivity là gì? ",
-      "command-line interface của Vue (hoặc CLI)",
-      "Khác nhau giữa v-show và v-if trong Vue",
+      {
+        id: 1,
+        content: "Prop component là gì? "
+      },
+      {
+        id: 2,
+        content: "Mô tả lifecycle hooks trong Vuejs",
+      },
+      {
+        id: 3,
+        content: "Trong Vuejs, reactivity là gì? ",
+      },
+      {
+        id: 4,
+        content: "command-line interface của Vue (hoặc CLI)",
+      },
+      {
+        id: 5,
+        content: "Trong Vuejs, mục đích của nextTick là gì? ",
+      },
     ])
     const dataAdvancedQuestion = reactive([
-      "Hãy nêu những hiểu biết của bạn về lập trình OOP?",
-      "Liệt kê các loại Directives (chỉ thị) có sẵn trong Vuejs Liệt kê các ",
-      "Mảng tuần tự là gì? Khác gì với bất tuần tự? Để duyệt mảng ta dùng vòng lặp nào?",
-      "PHP có mấy cách khai báo? Những cách nào được xem là chính thống và không ảnh hưởng khi các phiên bản update sau này?",
-      "Làm thế nào để xác minh nếu một đột biến (mutation) xảy ra? ",
-      "Tại sao component data phải là một function? ",
-      "Virtual DOM là gì? ",
-      "Lớp trong ngôn ngữ C# gồm mấy loại?",
-      "Sự khác nhau của Overload và Override là gì? Sử dụng khi nào?",
-      "Vue plugin là gì? ",
-      "Hằng trong PHP khác gì so với biến? Nếu 1 hằng được định nghĩa 2 lần, thì liệu có bị lỗi không?",
-      "Vue-loader là gì? ",
-      "Watchers là gì? ",
-      "Mô tả Single File Component (component file riêng biệt) trong Vuejs",
-      "Liệt kê các loại Directives (chỉ thị) có sẵn trong Vuejs",
+      {
+        id: 6,
+        content: "Hãy nêu những hiểu biết của bạn về lập trình OOP?",
+      },
+      {
+        id: 7,
+        content: "Liệt kê một số Directives (chỉ thị) có sẵn trong Vuejs hay sử dụng ",
+      },
+      {
+        id: 8,
+        content: "Mảng tuần tự là gì? Khác gì với bất tuần tự? Để duyệt mảng ta dùng vòng lặp nào?",
+      },
+      {
+        id: 9,
+        content: "Có thể sử dụng các Styled Components trong Vuejs không? ",
+      },
+      {
+        id: 10,
+        content: "Làm thế nào để xác minh nếu một đột biến (mutation) xảy ra? ",
+      },
+      {
+        id: 11,
+        content: "Tại sao component data phải là một function? ",
+      },
+      {
+        id: 12,
+        content: "Lớp trong ngôn ngữ C# gồm mấy loại?",
+      },
+      {
+        id: 13, 
+        content: "Instant prototyping là gì và nó làm việc như thế nào? ",
+      },
+      {
+        id: 14, 
+        content: "Mixins là gì? ",
+      },
     ])
 
     const dataExpertQuestion = reactive([
-      "Hãy nêu những hiểu biết của bạn về lập trình OOP?",
-      "Liệt kê các loại Directives (chỉ thị) có sẵn trong Vuejs Liệt kê các ",
-      "Tại sao component data phải là một function? ",
-      "Làm thế nào để xác minh nếu một đột biến (mutation) xảy ra? ",
-      "Virtual DOM là gì? ",
-      "PHP có mấy cách khai báo? Những cách nào được xem là chính thống và không ảnh hưởng khi các phiên bản update sau này?",
-      "Vue plugin là gì? ",
-      "Vue-loader là gì? ",
-      "Watchers là gì? ",
-      "Mô tả Single File Component (component file riêng biệt) trong Vuejs",
-      "Liệt kê các loại Directives (chỉ thị) có sẵn trong Vuejs",
+      {
+        id: 15, 
+        content: "Vue plugin là gì? ",
+      },
+      {
+        id: 16, 
+        content: "Vue-loader là gì? ",
+      },
+      {
+        id: 17, 
+        content: "Watchers là gì? ",
+      },
     ])
 
     const handleClickItemQuestion = (value: string) => {
-      console.log(value);
-      
       selectedContent.value = value
     }
 
-    const modalTimeOutVisible = ref(false);
+    const modalTimeOutVisible = ref<boolean>(false);
     const openModalTimeOut = () => {
       modalTimeOutVisible.value = true;
     };
@@ -221,7 +256,7 @@
   }
   .ant-list-item:hover,
   :global(div > div.ant-spin-nested-loading > div > ul > li:hover)
- {
+  {
     color: #21498c;
     cursor: pointer;
   }
@@ -234,14 +269,14 @@
     color: #21498c ; 
     font-size: 18px;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(1) > div > div > span) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(1) > div > div > span) {
     font-size: 22px;
     font-weight: 500;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(2) > div) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(2) > div) {
     width: 100% !important;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(2) > div > div > span.ant-select-selection-item) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(2) > div > div > span.ant-select-selection-item) {
     font-size: 18px;
     font-weight: 500;
     color: #21498c;
@@ -249,7 +284,7 @@
   :global( div > div.ant-list-pagination > ul > li.ant-pagination-item.ant-pagination-item-active > a) {
     background: #21498c;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
     font-size:16px
   }
   /* css pagination */
@@ -343,13 +378,13 @@
   :global(body > div:nth-child(11) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-body > ul) {
     margin-bottom: 15px;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
     color: #bbbbbb;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-tab.ant-tabs-tab-active > div) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-tab.ant-tabs-tab-active > div) {
     color: #21498c;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-ink-bar.ant-tabs-ink-bar-animated) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-ink-bar.ant-tabs-ink-bar-animated) {
     background: #21498c;
   }
   @media screen and (max-width: 768px) {
@@ -359,13 +394,13 @@
     :global(.bIdTT .chatbox-reply-form) {
       flex-direction: row;
     }
-    :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section) {
+    :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section) {
       margin-top: 16px;
     }
-    :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
+    :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
       font-size: 15px;
     }
-    :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-8.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(1) > div > div > span) {
+    :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(1) > div > div > span) {
       font-size: 20px;
     }
     :global(div > div.ant-spin-nested-loading > div > ul > li) {

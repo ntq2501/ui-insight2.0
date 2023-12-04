@@ -4,7 +4,7 @@
             :pagination="pagination"
         >
             <template #renderItem="{ item }">
-                <a-list-item @click="emit('onClickItemQuestion', item)">{{ item }}</a-list-item>
+                <a-list-item @click="emit('onClickItemQuestion', item)">{{ item.content }}</a-list-item>
             </template>
         </a-list>
 </template>
