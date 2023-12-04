@@ -1,11 +1,11 @@
 <template>
   <Main>
     <a-row :gutter="30">
-      <a-col :xxl="16" :lg="13" :xs="24" :sm="24" class="chat-section">
+      <a-col :xxl="16" :xl="16" :lg="13" :md="14" :xs="24" :sm="24" class="chat-section">
           <SingleChat />
       </a-col>
       
-      <a-col :xxl="8" :lg="11" :xs="24" :sm="24" class="sidebar-section">
+      <a-col :xxl="8" :xl="8" :lg="11" :md="10" :xs="24" :sm="24" class="sidebar-section">
           <UserBioBox>
             <sdCards headless>
               <article class="user-info">

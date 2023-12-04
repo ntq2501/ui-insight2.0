@@ -47,19 +47,19 @@ const handleChange = (e: any) => {
   inputValue.value = e.target.value;
 };
 
-const chatContainer = ref(null);
-// const scrollToBottom = () => {
-//   const container = chatContainer.value;
-//   container.scrollTop = container.scrollHeight;
-// };
-onMounted(() => {
-  const container = chatContainer.value;
-  // container.scrollTop = container.scrollHeight;
-  console.log(container);
-})
+const messageContainer = ref<HTMLDivElement | null>(null)
+const handleScrollBottom = () => {
+  if (messageContainer.value) {
+    const lastLiElement = messageContainer.value.querySelector('div.ps');
+    console.log('lastLiElement: ', lastLiElement?.scrollHeight);
+    console.log('lastLiElement: ', lastLiElement?.scrollTop);
+    //lastLiElement?.scrollTop = lastLiElement?.scrollHeight
+  }
+}
 
 const messages = ref<Array<string>>([]);
 const updatedContent = ref(singleContent.value);
+
 const handleSubmit = (e: any) => {
   e.preventDefault();
   const pushcontent = {
@@ -78,20 +78,7 @@ const handleSubmit = (e: any) => {
   }
   updatedContent.value = [...updatedContent.value, pushcontent];
   inputValue.value = '';
-  const msgContainer = document.querySelector('#messageContainer');
-  console.log('msgContainer: ', msgContainer);
-  console.log('msgContainer: ', msgContainer != null);
-  if(msgContainer != null) {
-    const lastLiElement = msgContainer.querySelector('li:last-child');
-    console.log('lastLiElement123: ', lastLiElement);
-    
-    if (lastLiElement != null) {
-      console.log('lastLiElement: ', lastLiElement);
-      
-      lastLiElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
- 
+  handleScrollBottom();
 };
 
 onMounted(() => dispatch('filterSinglePage', params.id || 'rofiq@gmail.com'));
@@ -156,14 +143,13 @@ const closeModal = () => {
         <p>Hoạt động</p>
       </template>
 
-      <ul class="ninjadash-chatbox" v-if="singleContent.length" ref="messageContainer">
+      <ul class="ninjadash-chatbox" v-if="singleContent.length" ref="messageContainer" id="messageContainer">
         <perfect-scrollbar
           :options="{
             wheelSpeed: 1,
             swipeEasing: true,
             suppressScrollX: true,
           }"
-          
         >
           <li
             v-for="({ time, img, email, content, id }, index) in singleContent"
