@@ -154,6 +154,7 @@ watch(() => {
     let ans = dataAns.filter(item => item.questionId == props.selectedContent.id);
     answer.value = ans ? ans[0].content : 'Xin lỗi, nhưng tôi không có khả năng cung cấp thông tin cho câu hỏi này!';
     answerIdLastest.value = ans ? ans[0].id : 0;
+    console.log(answerIdLastest.value);
     messages.value.push({
       content: answer.value,
       role: 'respondent',
@@ -240,7 +241,7 @@ const closeModal = () => {
                 <div class="ninjadash-chatbox__content">
                   <div v-if="role === 'respondent'" class="ninjadash-chatbox__contentInner d-flex">
                     <div class="ninjadash-chatbox__message">
-                      <img v-if="!visibleMessage && answerId === answerIdLastest" src="https://biller.ai/wp-content/uploads/2022/11/speech.gif" alt="">
+                      <img v-if="!visibleMessage && index === messages.length - 1" src="https://biller.ai/wp-content/uploads/2022/11/speech.gif" alt="">
                       <MessageList v-else class="message-box">{{ content }}</MessageList>
                     </div>
 
