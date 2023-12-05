@@ -328,6 +328,9 @@
   :global(body > div > div > div > div > div.rc-virtual-list > div.rc-virtual-list-holder > div > div > div.ant-select-item.ant-select-item-option.ant-select-item-option-selected > div) {
     color: #21498c;
   }
+  :global(body > div > div > div > div > div.rc-virtual-list > div.rc-virtual-list-holder > div > div > div.ant-select-item.ant-select-item-option.ant-select-item-option-selected) {
+    display: none;
+  }
   :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-14.ant-col-lg-15.ant-col-xl-15.ant-col-xxl-16.chat-section > div > div > div.ant-card-head) {
     border-bottom: 1px solid #f1f1f1;
   }
