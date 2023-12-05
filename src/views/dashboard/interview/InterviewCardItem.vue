@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="{ name: 'interviewDetail', params: { id } }">
+    <router-link :to="{ name: 'interview', params: { id } }">
         <a-card :hoverable="true">
             <img :src="imageSrc" alt=""> 
             <div class="interview_title" > 
