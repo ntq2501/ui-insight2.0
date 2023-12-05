@@ -320,9 +320,9 @@
     cursor: pointer;
   }
   :global(div > div.ant-spin-nested-loading) {
-    height: 365px;
-    min-height: 365px;
-    max-height: 365px;
+    height: 380px;
+    min-height: 380px;
+    max-height: 380px;
   }
   :global(body > div:nth-child(10) > div > div > div > div.rc-virtual-list > div.rc-virtual-list-holder > div > div > div > div:hover), 
   :global(body > div > div > div > div > div.rc-virtual-list > div.rc-virtual-list-holder > div > div > div.ant-select-item.ant-select-item-option.ant-select-item-option-selected > div) {
