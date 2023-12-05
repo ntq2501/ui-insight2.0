@@ -261,7 +261,9 @@
   margin-left: 0;
   cursor: pointer;
 }
-
+:global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-13.ant-col-lg-13.ant-col-xl-14.ant-col-xxl-16.chat-section > div > div > div.ant-card-head) {
+  border-bottom: 1px solid #f1f1f1;
+}
 
 :global(#app > div > div > section > section > section > main > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-13.ant-col-xxl-16.chat-section > div > div > div.ant-card-body > ul > div) {
   flex: 1;

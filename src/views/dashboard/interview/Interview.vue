@@ -265,6 +265,9 @@
     min-height: 385px;
     max-height: 385px;
   }
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-14.ant-col-lg-15.ant-col-xl-15.ant-col-xxl-16.chat-section > div > div > div.ant-card-head) {
+    border-bottom: 1px solid #f1f1f1;
+  }
   p.right-sidebar-title{
     color: #21498c ; 
     font-size: 18px;
