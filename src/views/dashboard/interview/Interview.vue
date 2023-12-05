@@ -4,7 +4,7 @@
           <ModalTimeout :visible="modalTimeOutVisible" :closeModalTimeOut="closeModalTimeOut" />
           <a-row :gutter="30">
             <a-col :xxl="16" :xl="15" :lg="15" :md="14" :xs="24" :sm="24" class="chat-section">
-                <SingleChat :selectedContent="selectedContent" />
+                <SingleChat :selectedContent="selectedContent" @visibleLoading="handleVisibleLoading" />
             </a-col>
             
             <a-col :xxl="8" :xl="9" :lg="9" :md="10" :xs="24" :sm="24" class="sidebar-section">
@@ -16,57 +16,109 @@
                         </sdHeading>
                         <a-statistic-countdown :value="deadline" :format="'mm:ss'" @finish="onFinish" />
                       </article>
-                      
-                      <article class="user-info">
-                        <a-select v-model:value="selectedValue" style="width: 120px" ref="select" @change="handleChange">
-                          <a-select-option value="1">Câu hỏi phổ biến</a-select-option>
-                          <a-select-option value="2">Câu hỏi mới nhất</a-select-option>
-                          <a-select-option value="3">Câu hỏi liên quan</a-select-option>
-                        </a-select>
-                      </article>
-
-                      <article class="user-info" v-if="selectedValue === '1'">
-                          <a-tabs v-model:activeKey="activeKey">
-                            <a-tab-pane key="1" tab="Cơ bản">
+                     
+                       <a-spin v-if="visibleLoading" >
+                        <article class="user-info">
+                          <a-select v-model:value="selectedValue" style="width: 120px" ref="select" @change="handleChange">
+                            <a-select-option value="1">Câu hỏi phổ biến</a-select-option>
+                            <a-select-option value="2">Câu hỏi mới nhất</a-select-option>
+                            <a-select-option value="3">Câu hỏi liên quan</a-select-option>
+                          </a-select>
+                        </article>
+  
+                        <article class="user-info" v-if="selectedValue === '1'">
+                            <a-tabs v-model:activeKey="activeKey">
+                              <a-tab-pane key="1" tab="Cơ bản">
+                                <ListItemQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
+                              </a-tab-pane>
+                              <a-tab-pane key="2" tab="Nâng cao">
+                                <ListItemQuestion  :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
+                              </a-tab-pane>
+                              <a-tab-pane key="3" tab="Chuyên gia">
+                                <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
+                              </a-tab-pane>
+                            </a-tabs>
+                        </article>
+  
+                        <article class="user-info" v-if="selectedValue === '2'">
+                          <a-tabs v-model:activeKey2="activeKey2">
+                            <a-tab-pane key="4" tab="Cơ bản">
+                              <ListItemQuestion :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            </a-tab-pane>
+                            <a-tab-pane key="5" tab="Nâng cao">
+                              <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            </a-tab-pane>
+                            <a-tab-pane key="6" tab="Chuyên gia">
+                              <ListItemQuestion  :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            </a-tab-pane>
+                          </a-tabs>
+                        </article>
+  
+                        <article class="user-info" v-if="selectedValue === '3'">
+                          <a-tabs v-model:activeKey3="activeKey3">
+                            <a-tab-pane key="7" tab="Cơ bản">
                               <ListItemQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
                             </a-tab-pane>
-                            <a-tab-pane key="2" tab="Nâng cao">
+                            <a-tab-pane key="8" tab="Nâng cao">
                               <ListItemQuestion  :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
                             </a-tab-pane>
-                            <a-tab-pane key="3" tab="Chuyên gia">
+                            <a-tab-pane key="9" tab="Chuyên gia">
                               <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
                             </a-tab-pane>
                           </a-tabs>
-                      </article>
-
-                      <article class="user-info" v-if="selectedValue === '2'">
-                        <a-tabs v-model:activeKey2="activeKey2">
-                          <a-tab-pane key="4" tab="Cơ bản">
-                            <ListItemQuestion :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
-                          </a-tab-pane>
-                          <a-tab-pane key="5" tab="Nâng cao">
-                            <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
-                          </a-tab-pane>
-                          <a-tab-pane key="6" tab="Chuyên gia">
-                            <ListItemQuestion  :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
-                          </a-tab-pane>
-                        </a-tabs>
-                      </article>
-
-                      <article class="user-info" v-if="selectedValue === '3'">
-                        <a-tabs v-model:activeKey3="activeKey3">
-                          <a-tab-pane key="7" tab="Cơ bản">
-                            <ListItemQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
-                          </a-tab-pane>
-                          <a-tab-pane key="8" tab="Nâng cao">
-                            <ListItemQuestion  :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
-                          </a-tab-pane>
-                          <a-tab-pane key="9" tab="Chuyên gia">
-                            <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
-                          </a-tab-pane>
-                        </a-tabs>
-                      </article>
-                 
+                        </article>
+                       </a-spin>
+                       <div v-else>
+                        <article class="user-info">
+                          <a-select v-model:value="selectedValue" style="width: 120px" ref="select" @change="handleChange">
+                            <a-select-option value="1">Câu hỏi phổ biến</a-select-option>
+                            <a-select-option value="2">Câu hỏi mới nhất</a-select-option>
+                            <a-select-option value="3">Câu hỏi liên quan</a-select-option>
+                          </a-select>
+                        </article>
+  
+                        <article class="user-info" v-if="selectedValue === '1'">
+                            <a-tabs v-model:activeKey="activeKey">
+                              <a-tab-pane key="1" tab="Cơ bản">
+                                <ListItemQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
+                              </a-tab-pane>
+                              <a-tab-pane key="2" tab="Nâng cao">
+                                <ListItemQuestion  :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
+                              </a-tab-pane>
+                              <a-tab-pane key="3" tab="Chuyên gia">
+                                <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
+                              </a-tab-pane>
+                            </a-tabs>
+                        </article>
+  
+                        <article class="user-info" v-if="selectedValue === '2'">
+                          <a-tabs v-model:activeKey2="activeKey2">
+                            <a-tab-pane key="4" tab="Cơ bản">
+                              <ListItemQuestion :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            </a-tab-pane>
+                            <a-tab-pane key="5" tab="Nâng cao">
+                              <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            </a-tab-pane>
+                            <a-tab-pane key="6" tab="Chuyên gia">
+                              <ListItemQuestion  :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            </a-tab-pane>
+                          </a-tabs>
+                        </article>
+  
+                        <article class="user-info" v-if="selectedValue === '3'">
+                          <a-tabs v-model:activeKey3="activeKey3">
+                            <a-tab-pane key="7" tab="Cơ bản">
+                              <ListItemQuestion :data="dataAdvancedQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            </a-tab-pane>
+                            <a-tab-pane key="8" tab="Nâng cao">
+                              <ListItemQuestion  :data="dataExpertQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            </a-tab-pane>
+                            <a-tab-pane key="9" tab="Chuyên gia">
+                              <ListItemQuestion  :data="dataBasicQuestion" @on-click-item-question="handleClickItemQuestion" />
+                            </a-tab-pane>
+                          </a-tabs>
+                        </article>
+                       </div>
                   </sdCards>
                 </UserBioBox>
             </a-col>
@@ -98,6 +150,11 @@
     const handleChange = (value: any) => {
       console.log(`selected ${value}`);
     };
+    const visibleLoading = ref(false);
+    const handleVisibleLoading = (data: boolean) => {
+      visibleLoading.value = !data;
+    };
+   
     const dataBasicQuestion = reactive([
       {
         id: 1,
@@ -210,9 +267,11 @@
   :global(#app > div > div > section > section > section > main) {
     margin-top: 0;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-9.ant-col-xxl-8.sidebar-section > div > div > div > article) {
-    padding-bottom: 15px;
-    margin-bottom: 15px;
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > div.ant-spin-container.ant-spin-blur > article:nth-child(1)),
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-9.ant-col-xxl-8.sidebar-section > div > div > div > div > article) {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 0;
   }
   :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-9.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(2)) {
     border: none;
@@ -276,14 +335,17 @@
     color: #21498c ; 
     font-size: 18px;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(1) > div > div > span) {
-    font-size: 22px;
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > div.ant-spin-container.ant-spin-blur > article:nth-child(1) > div > div > span),
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > article:nth-child(1) > div > div > span) {
+    font-size: 20px;
     font-weight: 500;
+    color: #21498c;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(2) > div) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > div.ant-spin-container.ant-spin-blur > article:nth-child(1) > div),
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > article:nth-child(1) > div) {
     width: 100% !important;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article:nth-child(2) > div > div > span.ant-select-selection-item) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > div > article:nth-child(2) > div > div > span.ant-select-selection-item) {
     font-size: 18px;
     font-weight: 500;
     color: #21498c;
@@ -291,7 +353,8 @@
   :global( div > div.ant-list-pagination > ul > li.ant-pagination-item.ant-pagination-item-active > a) {
     background: #21498c;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > div.ant-spin-container.ant-spin-blur > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div),
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
     font-size:16px
   }
   /* css pagination */
@@ -384,13 +447,14 @@
   :global(body > div:nth-child(11) > div > div.ant-modal-wrap > div > div.ant-modal-content > div.ant-modal-body > ul) {
     margin-bottom: 15px;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div > div) {
     color: #bbbbbb;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-tab.ant-tabs-tab-active > div) {
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-tab.ant-tabs-tab-active > div) {
     color: #21498c;
   }
-  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-ink-bar.ant-tabs-ink-bar-animated) {
+  :global(div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-ink-bar.ant-tabs-ink-bar-animated),
+  :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-10.ant-col-lg-9.ant-col-xl-9.ant-col-xxl-8.sidebar-section > div > div > div > div > article > div > div.ant-tabs-nav > div.ant-tabs-nav-wrap > div > div.ant-tabs-ink-bar.ant-tabs-ink-bar-animated) {
     background: #21498c;
   }
   @media screen and (max-width: 768px) {

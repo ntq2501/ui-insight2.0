@@ -13,7 +13,6 @@ const props = defineProps({
   dashboard: PropTypes.bool,
   selectedContent: PropTypes.string,
 });
-
 const { state, dispatch } = useStore();
 const { params } = useRoute();
 const rtl = computed(() => state.ChangeLayoutMode.rtlData);
@@ -21,7 +20,6 @@ const chatData = computed(() => state.chat.privateChat.data);
 const left = computed(() => (!rtl.value ? 'left' : 'right'));
 
 const me = ref('woadud@gmail.com');
-
 const singleContent = computed(() => (chatData.value[0] ? chatData.value[0].content : []));
 const name = 'AI';
 
@@ -114,10 +112,15 @@ const dataAns = reactive([
   },
 ])
 
+const visibleMessage = ref<boolean>(true);
+
 const inputValue = ref('');
 const fileList = ref([]);
 const fileList2 = ref([]);
 const messageContainer = ref<HTMLElement | null>(null);
+const messages = ref([]);
+const answer = ref<string>();
+const answerIdLastest = ref<number>();
 
 const handleChange = (e: any) => {
   inputValue.value = e.target.value;
@@ -137,43 +140,64 @@ const scrollToBottom = async () => {
     }
   }
 };
-
-const messages = ref([]);
-const answer = ref<string>();
-
+const emit = defineEmits(['visibleLoading']);
+const lastestContent = ref('');
 watch(() => {
-  if (props.selectedContent !== null && props.selectedContent !== '') {
+  if (props.selectedContent !== null && props.selectedContent !== '' && props.selectedContent.content !== lastestContent.value) {
     messages.value.push({
       content: props.selectedContent.content,
-      role: 'questioner'
+      role: 'questioner',
+      questionId: props.selectedContent.id,
+      answerId: 0,
     });
+    lastestContent.value = props.selectedContent.content;
     let ans = dataAns.filter(item => item.questionId == props.selectedContent.id);
     answer.value = ans ? ans[0].content : 'Xin lỗi, nhưng tôi không có khả năng cung cấp thông tin cho câu hỏi này!';
+    answerIdLastest.value = ans ? ans[0].id : 0;
     messages.value.push({
       content: answer.value,
-      role: 'respondent'
+      role: 'respondent',
+      answerId: ans ? ans[0].id : 0,
+      questionId: 0,
     });
+    
+    visibleMessage.value = false;
+    sendDataToParent();
     scrollToBottom();
   }
 });
 
 const handleSubmit = (e: any) => {
   e.preventDefault();
- 
   if(inputValue.value.trim() != '') {
     messages.value.push({
       content: inputValue.value,
-      role: 'questioner'
+      role: 'questioner',
+      answerId: 0,
+      questionId: 0,
     });
+    answerIdLastest.value = messages.value.length;
     messages.value.push({
       content: "Xin lỗi, nhưng tôi không có khả năng cung cấp thông tin cho câu hỏi này!",
-      role: 'respondent'
+      role: 'respondent',
+      answerId: messages.value.length,
+      questionId: 0,
     });
-    
+    visibleMessage.value = false;
+    sendDataToParent();
   }
-  inputValue.value = '';
   scrollToBottom();
+  inputValue.value = '';
 };
+
+const sendDataToParent = () => {
+  emit('visibleLoading', visibleMessage.value);
+  setTimeout(() => {
+    visibleMessage.value = true;
+    emit('visibleLoading', visibleMessage.value);
+    scrollToBottom();
+  }, 3000);
+}
 
 const modalVisible = ref(false);
 const openModalRating = () => {
@@ -195,7 +219,7 @@ const closeModal = () => {
         <p>Hoạt động</p>
       </template>
 
-      <ul class="ninjadash-chatbox" v-if="singleContent.length" ref="messageContainer">
+      <ul class="ninjadash-chatbox"  ref="messageContainer">
         <perfect-scrollbar
           :options="{
             wheelSpeed: 1,
@@ -204,7 +228,7 @@ const closeModal = () => {
           }"
         >
           <li
-            v-for="({ content, role }, index) in messages"
+            v-for="({ content, role, answerId }, index) in messages"
             :key="index"
             class="ninjadash-chatbox__single"
           >
@@ -216,10 +240,11 @@ const closeModal = () => {
                 <div class="ninjadash-chatbox__content">
                   <div v-if="role === 'respondent'" class="ninjadash-chatbox__contentInner d-flex">
                     <div class="ninjadash-chatbox__message">
-                      <MessageList class="message-box">{{ content }}</MessageList>
+                      <img v-if="!visibleMessage && answerId === answerIdLastest" src="https://biller.ai/wp-content/uploads/2022/11/speech.gif" alt="">
+                      <MessageList v-else class="message-box">{{ content }}</MessageList>
                     </div>
 
-                    <div class="ninjadash-chatbox__actions">
+                    <div v-if="visibleMessage" class="ninjadash-chatbox__actions">
                       <unicon name="ellipsis-h" width="18" @click="openModalRating"></unicon>
                     </div>
                   </div>
@@ -251,10 +276,10 @@ const closeModal = () => {
 
         </perfect-scrollbar>
       </ul>
-      <p v-else class="no-data-text">Không có dữ liệu</p>
+      <!-- <p v-else class="no-data-text">Không có dữ liệu</p> -->
 
       <Footer>
-        <form @submit="handleSubmit">
+        <form @submit="visibleMessage ? handleSubmit : null" :class="{ 'disabled-form': !visibleMessage }">
           <div :class="`chatbox-reply-form d-flex ${fileList.length && 'hasImage'} ${fileList2.length && 'hasFile'}`">
             <div class="chatbox-reply-input">
               <input
@@ -267,7 +292,7 @@ const closeModal = () => {
               />
             </div>
             <div class="chatbox-reply-action d-flex">
-              <sdButton @click="handleSubmit" type="primary" class="btn-send">
+              <sdButton @click="handleSubmit" type="primary" class="btn-send" >
                 <unicon name="message" width="18"></unicon>
               </sdButton>
             </div>
@@ -295,6 +320,10 @@ const closeModal = () => {
 :global(.cemhnt .ninjadash-chatbox .ninjadash-chatbox__single .right .message-box) {
   background-color: #5840FF;
   color: #fff;
+}
+.disabled-form {
+  pointer-events: none;
+  opacity: 0.5; 
 }
 #chat{
   background-color: #e6e5e5;
