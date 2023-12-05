@@ -261,9 +261,9 @@
     cursor: pointer;
   }
   :global(div > div.ant-spin-nested-loading) {
-    height: 370px;
-    min-height: 370px;
-    max-height: 370px;
+    height: 365px;
+    min-height: 365px;
+    max-height: 365px;
   }
   :global(body > div:nth-child(10) > div > div > div > div.rc-virtual-list > div.rc-virtual-list-holder > div > div > div > div:hover), 
   :global(body > div > div > div > div > div.rc-virtual-list > div.rc-virtual-list-holder > div > div > div.ant-select-item.ant-select-item-option.ant-select-item-option-selected > div) {
@@ -351,7 +351,6 @@
     background: #dfdfdf;
     border-radius: 6px;
   }
-
   :global(#interview-wrapper > div > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-lg-9.ant-col-xxl-8.sidebar-section) {
     height: calc(100vh - 100px);
   }
@@ -395,6 +394,11 @@
     background: #21498c;
   }
   @media screen and (max-width: 768px) {
+    :global(div > div.ant-spin-nested-loading) {
+      height: 350px;
+      min-height: 350px;
+      max-height: 350px;
+    }
     :global(.bIdTT .chatbox-reply-form .chatbox-reply-input input) {
       margin-bottom: 0;
     }
