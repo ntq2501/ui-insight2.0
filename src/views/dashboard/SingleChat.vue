@@ -241,7 +241,7 @@ const closeModal = () => {
                 <div class="ninjadash-chatbox__content">
                   <div v-if="role === 'respondent'" class="ninjadash-chatbox__contentInner d-flex">
                     <div class="ninjadash-chatbox__message">
-                      <img v-if="!visibleMessage && index === messages.length - 1" src="https://biller.ai/wp-content/uploads/2022/11/speech.gif" alt="">
+                      <img v-if="!visibleMessage && index === messages.length - 1" src="@/assets/img/typing.gif" alt="" style="margin-top: 16px;">
                       <MessageList v-else class="message-box">{{ content }}</MessageList>
                     </div>
 
