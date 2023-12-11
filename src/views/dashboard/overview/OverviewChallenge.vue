@@ -416,12 +416,6 @@
     const dataFilter = ref(data.value.filter(item => item.tournamentId === tabActive.value));
 
     const handleFilterData = () => {
-        // dataFilter.value = data.value.filter(
-        //     item => (tournamentSelected.value != 1 ? item.tournamentId === tournamentSelected.value : null)
-        //     && (statusSelected.value != 1 ? item.status === statusSelected.value : null)
-        //     && (timeSelected.value ? item.timeId === timeSelected.value : null)
-        //     && (attendeSelected.value != 1 ? item.attendeesId === attendeSelected.value : null)
-        // );
         
     }
 
