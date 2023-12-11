@@ -122,16 +122,16 @@
                                 </a-col>
                             </template>
                             <template v-else>
-                                <a-col v-for="item in dataFilter" :key="item.id" :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
+                                <a-col :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
                                     <CardOverviewChallenge title="Đang diễn ra" :quantity="0" bgImage="/src/assets/img/card-report-happending.png" :link="'0'"/>
                                 </a-col>
-                                <a-col v-for="item in dataFilter" :key="item.id" :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
+                                <a-col :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
                                     <CardOverviewChallenge title="Sắp diễn ra" :quantity="0" bgImage="/src/assets/img/card-report-upcoming.png" :link="'0'"/>
                                 </a-col>
-                                <a-col v-for="item in dataFilter" :key="item.id" :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
+                                <a-col :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
                                     <CardOverviewChallenge title="Đã diễn ra" :quantity="0" bgImage="/src/assets/img/card-report-took-place.png" :link="'0'"/>
                                 </a-col>
-                                <a-col v-for="item in dataFilter" :key="item.id" :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
+                                <a-col :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
                                     <CardOverviewChallenge title="Đã hủy" :quantity="0" bgImage="/src/assets/img/card-report-cancel.png" :link="'0'"/>
                                 </a-col>
                             </template>
@@ -416,12 +416,20 @@
     const dataFilter = ref(data.value.filter(item => item.tournamentId === tabActive.value));
 
     const handleFilterData = () => {
-        
+        dataFilter.value = data.value.filter(item => item.tournamentId === tabActive.value);
+        if(statusSelected.value != 1) {            
+            dataFilter.value = dataFilter.value.filter(item => item.status === statusSelected.value);
+        }
+        if(timeSelected.value != 1) {
+            dataFilter.value = dataFilter.value.filter(item => item.timeId === timeSelected.value);
+        }
+        if(attendeSelected.value != 1) {
+            dataFilter.value = dataFilter.value.filter(item => item.attendeesId === attendeSelected.value);
+        }
     }
 
     const handleChangeTournament = (value: number) => {
         handleFilterData();
-        console.log(dataFilter);
         tabActive.value = tournamentSelected.value;
     };
     const handleChangeStatus = (value: number) => {
@@ -436,7 +444,7 @@
 
     watch(tabActive, (newValue) => {
         tournamentSelected.value = tabActive.value;
-        dataFilter.value = data.value.filter(item => item.tournamentId === newValue);
+        handleFilterData();
     });
 
 
