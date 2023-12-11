@@ -149,4 +149,9 @@ export default [
     name: 'interview',
     component: () => import("@/views/dashboard/interview/Interview.vue"),
   },
+  {
+    path: '/dautruong/tongquan',
+    name: 'overviewChallenge',
+    component: () => import('@/views/dashboard/overview/OverviewChallenge.vue'),
+  },
 ];

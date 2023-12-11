@@ -70,6 +70,7 @@ const routes = [
       },
     ],
   },
+  
   ...studentRoutes,
   ...UserRoutes,
   ...App,

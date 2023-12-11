@@ -146,7 +146,7 @@ watch(() => {
   if (props.selectedContent !== null && props.selectedContent !== '' && props.selectedContent.content !== lastestContent.value) {
     messages.value.push({
       content: props.selectedContent.content,
-      role: 'questioner',
+      role: 'questioner', 
       questionId: props.selectedContent.id,
       answerId: 0,
     });
