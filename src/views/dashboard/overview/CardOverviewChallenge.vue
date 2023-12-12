@@ -44,14 +44,13 @@
     z-index: 3; 
 }
 #card-overview-challenge > div > div {
-    padding: 35px;
     align-self: end;
     width: 50% !important;
     text-align: center;
 }
 #card-overview-challenge > div > div > p {
     font-weight: 600;
-    font-size: 38px;
+    font-size: 40px;
     color: #ffffff;
     text-align: center;
 }
@@ -72,21 +71,10 @@
     display: flex;
     flex-direction: column;
 }
-@media only screen and (min-width:1000px) and (max-width: 1060px) {
-    #card-overview-challenge > div > div {
-        width: 60% !important;
-    }
-}
 @media only screen and (min-width:768px) and (max-width: 1000px) {
-    #card-overview-challenge > div > div {
-        width: 65% !important;
-    }
     #card-overview-challenge > div > div > a > button {
         border-radius:30px;
-        color: #ffffff;
-        border: none;
         padding: 8px 18px;
-        height: unset;
         font-size: 16px;
     }
 }

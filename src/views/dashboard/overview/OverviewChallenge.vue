@@ -15,7 +15,7 @@
                 </a-breadcrumb>
             </BreadcrumbWrapperStyle>
             <a-row :gutter="30">
-                <a-col :xxl="17" :xl="17" :lg="17" :md="16" :xs="24" :sm="24">
+                <a-col :xxl="17" :xl="17" :lg="16" :md="16" :xs="24" :sm="24">
                     <article>
                         <sdHeading as="h5" class="user-info__title">
                             <p class="right-sidebar-title" >Công cụ tìm kiếm</p>
@@ -140,7 +140,7 @@
                     </article>
                 </a-col>
     
-                <a-col :xxl="7" :xl="7" :lg="7" :md="8" :xs="24" :sm="24">
+                <a-col :xxl="7" :xl="7" :lg="8" :md="8" :xs="24" :sm="24">
                     <RightSideBarOverviewChallenge :dataRanking="topRanking"/>
                 </a-col>
             </a-row>
@@ -483,142 +483,142 @@
 #overview-challenge-container {
     padding: 30px 0 30px 30px ;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info) {
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
     font-size: 15px;
     font-weight: 500;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div > div),
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div),
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div > div),
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div),
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div) {
     width: 100%;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div > div > div) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div > div > div) {
     border-radius: 8px;
 }
 :global(#overview-challenge-container > div) {
     margin-top: 35px;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2)) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2)) {
     margin-top: 24px;   
 }
 
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label) {
     background: #dadada;
     border-radius: 16px;
     border: none;
     width: 150px;
     text-align: center;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label:hover) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label:hover) {
     color: #000000;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div) {
     border-radius: 16px;
     background: #dadada;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span:nth-child(2)) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span:nth-child(2)) {
     font-weight: 500;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked) {
     outline: none;
     border: none;
     background: #ffffff;
     Padding: 8px, 24px, 8px, 24px;
     border-radius: 16px;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span:nth-child(2)) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span:nth-child(2)) {
     color: #000000;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label::before) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label::before) {
     display:none;
 }
 :global(#app > div > div > section > section > section > main > main) {
     background: #f2f2f2;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div) {
     position: relative;
     height: 300px;    
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div > img) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div > img) {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3)) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3)) {
     margin-top: 25px;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li) {
     border: none;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(1)) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(1)) {
     display: flex;
     align-items: center;
     padding: 0 20px 0 25px !important;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div) {
     padding-left: 15px;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div > p) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div > p) {
     margin-bottom: 4px;
     font-size: 14px;
     font-weight: 700;
     color: #344767;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div > span:nth-child(3)) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div > span:nth-child(3)) {
     color: #344767;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div > div > div > span:nth-child(2)) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div > div > div > span:nth-child(2)) {
     padding-right: 4px;
     color: #4CAF50;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info > div > h1 > p) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info > div > h1 > p) {
     text-transform: unset;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div) {
     border-radius: 35px;
     overflow: hidden;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div > div > div) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div) {
     margin-bottom: 0 !important;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7) {
     padding-right: 0 !important;
 }
 :global(#overview-challenge-container > div) {
     margin-right: 0 !important;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-7.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info > div > span) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-8.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info > div > span) {
     height: fit-content;
     font-size: 16px;
     color: #3895FF;
     cursor: pointer;
 }
-:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button:focus) {
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button:focus) {
     border: none;
     box-shadow: unset;
     outline: none;
 }
-@media only screen and (min-width:1000px) and (max-width: 1060px) {
-    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
+@media only screen and (min-width:1000px) and (max-width: 1200px) {
+    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
         font-size: 14px;
     }
 }
 @media only screen and (min-width:768px) and (max-width: 1000px) {
-    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div) {
+    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div) {
         height: 290px;    
     }
 }
 @media screen and (max-width:768px){
-    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(1) > div > div > h1 > p) {
+    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(1) > div > div > h1 > p) {
         margin-bottom: 6px;
     }
-    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label) {
+    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label) {
         width: unset;
     }
     #overview-challenge-container {
