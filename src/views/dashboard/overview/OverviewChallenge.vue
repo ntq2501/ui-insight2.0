@@ -12,6 +12,7 @@
                     <a-breadcrumb-item>
                         <router-link to="/dautruong/tongquan">Tổng quan</router-link>
                     </a-breadcrumb-item>
+                    
                 </a-breadcrumb>
             </BreadcrumbWrapperStyle>
             <a-row :gutter="[30, 30]">
@@ -108,31 +109,31 @@
                             <template v-if="dataFilter.length > 0">
                                 <a-col v-for="item in dataFilter" :key="item.id" :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
                                     <template v-if="item.status === 2">
-                                        <CardOverviewChallenge title="Đang diễn ra" :quantity="item.quantity" bgImage="/src/assets/img/card-report-happending.png" :link="item.id.toString"/>
+                                        <CardOverviewChallenge title="Đang diễn ra" :quantity="item.quantity" bgImage="/src/assets/img/card-report-happending.png" :id="2"/>
                                     </template>
                                     <template v-else-if="item.status === 3">
-                                        <CardOverviewChallenge title="Sắp diễn ra" :quantity="item.quantity" bgImage="/src/assets/img/card-report-upcoming.png" :link="item.id.toString"/>
+                                        <CardOverviewChallenge title="Sắp diễn ra" :quantity="item.quantity" bgImage="/src/assets/img/card-report-upcoming.png" :id="3"/>
                                     </template>
                                     <template v-else-if="item.status === 4">
-                                        <CardOverviewChallenge title="Đã diễn ra" :quantity="item.quantity" bgImage="/src/assets/img/card-report-took-place.png" :link="item.id.toString"/>
+                                        <CardOverviewChallenge title="Đã diễn ra" :quantity="item.quantity" bgImage="/src/assets/img/card-report-took-place.png" :id="4"/>
                                     </template>
                                     <template v-else-if="item.status === 5">
-                                        <CardOverviewChallenge title="Đã hủy" :quantity="item.quantity" bgImage="/src/assets/img/card-report-cancel.png" :link="item.id.toString"/>
+                                        <CardOverviewChallenge title="Đã hủy" :quantity="item.quantity" bgImage="/src/assets/img/card-report-cancel.png" :id="5"/>
                                     </template>
                                 </a-col>
                             </template>
                             <template v-else>
                                 <a-col :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
-                                    <CardOverviewChallenge title="Đang diễn ra" :quantity="0" bgImage="/src/assets/img/card-report-happending.png" :link="'0'"/>
+                                    <CardOverviewChallenge title="Đang diễn ra" :quantity="0" bgImage="/src/assets/img/card-report-happending.png" :id="2"/>
                                 </a-col>
                                 <a-col :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
-                                    <CardOverviewChallenge title="Sắp diễn ra" :quantity="0" bgImage="/src/assets/img/card-report-upcoming.png" :link="'0'"/>
+                                    <CardOverviewChallenge title="Sắp diễn ra" :quantity="0" bgImage="/src/assets/img/card-report-upcoming.png" :id="3"/>
                                 </a-col>
                                 <a-col :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
-                                    <CardOverviewChallenge title="Đã diễn ra" :quantity="0" bgImage="/src/assets/img/card-report-took-place.png" :link="'0'"/>
+                                    <CardOverviewChallenge title="Đã diễn ra" :quantity="0" bgImage="/src/assets/img/card-report-took-place.png" :id="4"/>
                                 </a-col>
                                 <a-col :xxl="12" :xl="12" :lg="12" :md="12" :xs="24" :sm="24">
-                                    <CardOverviewChallenge title="Đã hủy" :quantity="0" bgImage="/src/assets/img/card-report-cancel.png" :link="'0'"/>
+                                    <CardOverviewChallenge title="Đã hủy" :quantity="0" bgImage="/src/assets/img/card-report-cancel.png" :id="5"/>
                                 </a-col>
                             </template>
 
@@ -475,7 +476,6 @@
         tournamentSelected.value = tabActive.value;
         handleFilterData();
     });
-
 
 </script>
 

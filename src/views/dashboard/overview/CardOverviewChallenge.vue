@@ -5,9 +5,7 @@
             <h3>{{ props.title }}</h3>
             <div>
                 <p>{{ props.quantity }}</p>
-                <router-link :to="props.link">
-                    <a-button type="primary">Xem tất cả</a-button>
-                </router-link>
+                <a-button @click="handleRedirect(id)" type="primary">Xem tất cả</a-button>
             </div>
         </div>
     </div>
@@ -15,13 +13,17 @@
 
 <script setup lang="ts">
     import PropTypes from 'vue-types';
+    import router from '@/router';
 
     const props = defineProps({
         title: PropTypes.string,
         bgImage: PropTypes.string,
         quantity: PropTypes.number,
-        link: PropTypes.string,
+        id: PropTypes.number,
     });
+    const handleRedirect = (id: number) => {
+        router.push({name: 'overviewChallengeDetail', params: {id}});
+    }
 </script>
 <style scoped>
 #card-overview-challenge {
@@ -55,7 +57,7 @@
     color: #ffffff;
     text-align: center;
 }
-#card-overview-challenge > div > div > a > button {
+#card-overview-challenge > div > div > button {
     background-color: #E65A2B;
     border-radius:30px;
     color: #ffffff;
@@ -64,7 +66,7 @@
     height: unset;
     font-size: 20px;
 }
-#card-overview-challenge > div > div > a > button:hover {
+#card-overview-challenge > div > div > button:hover {
     cursor: pointer;
     opacity: 0.8;
 }
@@ -73,7 +75,7 @@
     flex-direction: column;
 }
 @media only screen and (min-width:768px) and (max-width: 1000px) {
-    #card-overview-challenge > div > div > a > button {
+    #card-overview-challenge > div > div > button {
         border-radius:30px;
         padding: 8px 18px;
         font-size: 16px;
@@ -84,7 +86,7 @@
         font-size: 26px;
         font-weight: 600;
     }
-    #card-overview-challenge > div > div > a > button {
+    #card-overview-challenge > div > div > button {
         padding: 8px 20px;
         font-size: 18px;
     }

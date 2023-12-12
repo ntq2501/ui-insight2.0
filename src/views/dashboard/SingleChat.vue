@@ -142,7 +142,7 @@ const scrollToBottom = async () => {
 };
 const emit = defineEmits(['visibleLoading']);
 const lastestContent = ref('');
-watch(() => {
+watch(props.selectedContent,(newValue, oldValue) => {
   if (props.selectedContent !== null && props.selectedContent !== '' && props.selectedContent.content !== lastestContent.value) {
     messages.value.push({
       content: props.selectedContent.content,
