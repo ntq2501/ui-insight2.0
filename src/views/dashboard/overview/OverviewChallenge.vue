@@ -508,7 +508,7 @@
 
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label) {
     background: #dadada;
-    border-radius: 16px;
+    border-radius: 15px;
     border: none;
     width: 150px;
     text-align: center;
@@ -517,7 +517,7 @@
     color: #000000;
 }
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div) {
-    border-radius: 16px;
+    border-radius: 15px;
     background: #dadada;
 }
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span:nth-child(2)) {
@@ -528,7 +528,7 @@
     border: none;
     background: #ffffff;
     Padding: 8px, 24px, 8px, 24px;
-    border-radius: 16px;
+    border-radius: 15px;
 }
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span:nth-child(2)) {
     color: #000000;
