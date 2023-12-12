@@ -47,6 +47,7 @@
     align-self: end;
     width: 50% !important;
     text-align: center;
+    margin-top: 25px;
 }
 #card-overview-challenge > div > div > p {
     font-weight: 600;
