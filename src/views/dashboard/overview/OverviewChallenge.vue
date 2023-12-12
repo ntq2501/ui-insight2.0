@@ -604,7 +604,7 @@
     box-shadow: unset;
     outline: none;
 }
-@media only screen and (min-width:1000px) and (max-width: 1200px) {
+@media only screen and (min-width:1000px) and (max-width: 1372px) {
     :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
         font-size: 14px;
     }
