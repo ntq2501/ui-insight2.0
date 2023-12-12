@@ -141,7 +141,7 @@
                 </a-col>
     
                 <a-col :xxl="7" :xl="7" :lg="7" :md="8" :xs="24" :sm="24">
-                    <RightSideBarOverviewChallenge :dataRanking="dataRanking"/>
+                    <RightSideBarOverviewChallenge :dataRanking="topRanking"/>
                 </a-col>
             </a-row>
         </div>
@@ -264,28 +264,28 @@
             id: 1,
             avatar: '/src/assets/img/avatar.png',
             name: 'Sobin Sam Son',
-            elo: 1500,
+            elo: 1600,
             attended: 1500,
         },
         {
             id: 2,
             avatar: '/src/assets/img/avatar.png',
             name: 'Sobin Sam Son',
-            elo: 1400,
+            elo: 800,
             attended: 1600,
         },
         {
             id: 3,
             avatar: '/src/assets/img/avatar.png',
             name: 'Sobin Sam Son',
-            elo: 1400,
+            elo: 2000,
             attended: 2000,
         },
         {
             id: 4,
             avatar: '/src/assets/img/avatar.png',
             name: 'Sobin Sam Son',
-            elo: 1500,
+            elo: 1900,
             attended: 2100,
         },
         {
@@ -320,17 +320,46 @@
             id: 9,
             avatar: '/src/assets/img/avatar.png',
             name: 'Sobin Sam Son',
-            elo: 1500,
+            elo: 1450,
             attended: 2100,
         },
         {
             id: 10,
             avatar: '/src/assets/img/avatar.png',
             name: 'Sobin Sam Son',
-            elo: 1500,
+            elo: 1350,
             attended: 2100,
         },
+        {
+            id: 11,
+            avatar: '/src/assets/img/avatar.png',
+            name: 'Sobin Sam Son',
+            elo: 1200,
+            attended: 2000,
+        },
+        {
+            id: 12,
+            avatar: '/src/assets/img/avatar.png',
+            name: 'Sobin Sam Son',
+            elo: 1150,
+            attended: 1900,
+        },
+        {
+            id: 13,
+            avatar: '/src/assets/img/avatar.png',
+            name: 'Sobin Sam Son',
+            elo: 1290,
+            attended: 1990,
+        },
+        {
+            id: 14,
+            avatar: '/src/assets/img/avatar.png',
+            name: 'Sobin Sam Son',
+            elo: 1300,
+            attended: 1900,
+        },
     ])
+    const topRanking = ref(dataRanking.sort((a, b) => b.elo - a.elo).slice(0,10))
 
     const optionTournaments = reactive([
         {
