@@ -24,6 +24,10 @@
     });
 </script>
 <style scoped>
+#card-overview-challenge {
+    border-radius: 40px;
+    overflow: hidden;
+}
 #card-overview-challenge > div > h3 {
     padding: 10px 20px;
     border-bottom: 1px solid #F0F2F5;
@@ -68,7 +72,24 @@
     display: flex;
     flex-direction: column;
 }
-
+@media only screen and (min-width:1000px) and (max-width: 1060px) {
+    #card-overview-challenge > div > div {
+        width: 60% !important;
+    }
+}
+@media only screen and (min-width:768px) and (max-width: 1000px) {
+    #card-overview-challenge > div > div {
+        width: 65% !important;
+    }
+    #card-overview-challenge > div > div > a > button {
+        border-radius:30px;
+        color: #ffffff;
+        border: none;
+        padding: 8px 18px;
+        height: unset;
+        font-size: 16px;
+    }
+}
 @media screen and (max-width: 768px){
     #card-overview-challenge > div > h3 {
         font-size: 26px;

@@ -151,7 +151,7 @@
 <script setup lang="ts">
     import RightSideBarOverviewChallenge from '@/views/dashboard/overview/RightSideBarOverviewChallenge.vue';
     import CardOverviewChallenge from '@/views/dashboard/overview/CardOverviewChallenge.vue';
-    import { computed, reactive, ref, watch } from 'vue';
+    import { reactive, ref, watch } from 'vue';
 
     const tournamentSelected = ref<number>(1);
     const statusSelected = ref<number>(1);
@@ -603,6 +603,16 @@
     border: none;
     box-shadow: unset;
     outline: none;
+}
+@media only screen and (min-width:1000px) and (max-width: 1060px) {
+    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
+        font-size: 14px;
+    }
+}
+@media only screen and (min-width:768px) and (max-width: 1000px) {
+    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div) {
+        height: 290px;    
+    }
 }
 @media screen and (max-width:768px){
     :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-16.ant-col-lg-17.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(1) > div > div > h1 > p) {
