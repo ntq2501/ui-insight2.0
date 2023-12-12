@@ -484,7 +484,7 @@
     padding: 30px 0 30px 30px ;
 }
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info) {
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     margin-bottom: 10px;
 }
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
@@ -559,13 +559,13 @@
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(1)) {
     display: flex;
     align-items: center;
-    padding: 0 20px 0 25px !important;
+    padding: 0 10px 0 15px !important;
 }
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div) {
-    padding-left: 15px;
+    padding-left: 12px;
 }
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div > p) {
-    margin-bottom: 4px;
+    margin-bottom: 0;
     font-size: 14px;
     font-weight: 700;
     color: #344767;
@@ -578,7 +578,8 @@
     color: #4CAF50;
 }
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info > div > h1 > p) {
-    text-transform: unset;
+    text-transform: initial;
+    font-size: 20px;
 }
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div) {
     border-radius: 35px;
@@ -599,10 +600,15 @@
     color: #3895FF;
     cursor: pointer;
 }
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked),
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked > input),
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked > span),
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button > input),
+:global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button > span),
 :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button:focus) {
-    border: none;
-    box-shadow: unset;
-    outline: none;
+    border: none !important;
+    box-shadow: unset !important;
+    outline: none !important;
 }
 @media only screen and (min-width:1000px) and (max-width: 1372px) {
     :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
@@ -623,6 +629,9 @@
     }
     #overview-challenge-container {
         padding-left: 15px;
+    }
+    :global(#overview-challenge-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(1)) {
+        padding: 0 20px 0 25px !important;
     }
 }
 </style>

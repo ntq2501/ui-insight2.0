@@ -33,7 +33,7 @@
                                     </a-col>
                                     <a-col>
                                         <a-row :gutter="8">
-                                            <img :src="item.avatar" alt="Avatar" style="width: 48px; height: 48px; border-radius: 50%;">
+                                            <img :src="item.avatar" alt="Avatar" style="width: 44px; height: 44px; border-radius: 50%;">
                                             <div>
                                                 <p>{{ item.name }}</p> 
                                                 <span>Elo: {{ item.elo }}</span> 
