@@ -5,7 +5,7 @@
             <h3>{{ props.title }}</h3>
             <div>
                 <p>{{ props.quantity }}</p>
-                <a-button @click="handleRedirect(id)" type="primary">Xem tất cả</a-button>
+                <a-button @click="handleRedirect(props.id)" type="primary">Xem tất cả</a-button>
             </div>
         </div>
     </div>
@@ -22,6 +22,7 @@
         id: PropTypes.number,
     });
     const handleRedirect = (id: number) => {
+        console.log(id);
         router.push({name: 'overviewChallengeDetail', params: {id}});
     }
 </script>

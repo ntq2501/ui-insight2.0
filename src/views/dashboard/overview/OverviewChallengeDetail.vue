@@ -238,7 +238,7 @@
         },
     ];
         
-    const data = reactive([
+    const data = ref([
         {
             id: 1,
             challengeId: 3,
@@ -604,9 +604,6 @@
         },
     ]);
 
-    function onChange(pagination:any, filters:any, sorter:any, extra:any) {
-        console.log('params', pagination, filters, sorter, extra);
-    }
     const dataRanking = reactive([
         {
             id: 1,
@@ -792,7 +789,7 @@
 
     const statusContentActive = ref(optionStatus.filter((item:any) => item.id == statusId));
 
-    // const dataFilter = ref(data.value.filter(item => item.tournamentId === tabActive.value));
+    const dataFilter = ref(data.value.filter(item => item.challengeId === tabActive.value));
 
     const handleFilterData = () => {
         // dataFilter.value = data.value.filter(item => item.tournamentId === tabActive.value);
@@ -987,6 +984,9 @@
     }
 }
 @media only screen and (min-width:768px) and (max-width: 1000px) {
+    :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > h3) {
+        margin-top: 10px;
+    }
     :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div) {
         height: 290px;    
     }
