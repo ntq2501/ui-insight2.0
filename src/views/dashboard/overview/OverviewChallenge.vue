@@ -163,7 +163,7 @@
     const data = ref([
         {
             id: 1,
-            quantity: 13,
+            quantity: 1,
             status: 2,
             tournamentId: 2,
             attendeesId: 2,
@@ -171,7 +171,7 @@
         },
         {
             id: 2,
-            quantity: 123,
+            quantity: 13,
             status: 3,
             attendeesId: 2,
             tournamentId: 2,
@@ -187,7 +187,7 @@
         },
         {
             id: 4,
-            quantity: 213,
+            quantity: 3,
             status: 5,
             attendeesId: 2,
             tournamentId: 2,
@@ -195,7 +195,7 @@
         },
         {
             id: 8,
-            quantity: 1000,
+            quantity: 5,
             status: 2,
             attendeesId: 3,
             tournamentId: 3,
@@ -203,7 +203,7 @@
         },
         {
             id: 5,
-            quantity: 100,
+            quantity: 10,
             status: 3,
             attendeesId: 3,
             tournamentId: 3,
@@ -211,7 +211,7 @@
         },
         {
             id: 6,
-            quantity: 113,
+            quantity: 11,
             status: 4,
             attendeesId: 3,
             tournamentId: 3,
@@ -219,7 +219,7 @@
         },
         {
             id: 7,
-            quantity: 200,
+            quantity: 20,
             status: 5,
             attendeesId: 3,
             tournamentId: 3,
@@ -228,7 +228,7 @@
       
         {
             id: 9,
-            quantity: 88,
+            quantity: 6,
             status: 2,
             attendeesId: 4,
             tournamentId: 1,
@@ -236,7 +236,7 @@
         },
         {
             id: 10,
-            quantity: 13,
+            quantity: 23,
             status: 3,
             attendeesId: 4,
             tournamentId: 1,
@@ -244,7 +244,7 @@
         },
         {
             id: 11,
-            quantity: 1111,
+            quantity: 21,
             status: 4,
             attendeesId: 4,
             tournamentId: 1,
@@ -252,7 +252,7 @@
         },
         {
             id: 12,
-            quantity: 1,
+            quantity: 23,
             status: 5,
             attendeesId: 4,
             tournamentId: 1,

@@ -22,7 +22,6 @@
         id: PropTypes.number,
     });
     const handleRedirect = (id: number) => {
-        console.log(id);
         router.push({name: 'overviewChallengeDetail', params: {id}});
     }
 </script>

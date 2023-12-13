@@ -155,7 +155,7 @@ export default [
     component: () => import('@/views/dashboard/overview/OverviewChallenge.vue'),
   },
   {
-    path: '/dautruong/tongquan/chitiet',
+    path: '/dautruong/tongquan/:id',
     name: 'overviewChallengeDetail',
     component: () => import('@/views/dashboard/overview/OverviewChallengeDetail.vue'),
   },

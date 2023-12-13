@@ -1,6 +1,6 @@
 <template>
     <Main>
-        <div id="overview-challenge-Detail-container">
+        <div id="overview-tournament-Detail-container">
             <BreadcrumbWrapperStyle>
                 <a-breadcrumb>
                     <a-breadcrumb-item>
@@ -13,7 +13,7 @@
                         <router-link to="/dautruong/tongquan">Tổng quan</router-link>
                     </a-breadcrumb-item>
                     <a-breadcrumb-item>
-                        <router-link to="/dautruong/tongquan/chitiet">{{ statusContentActive.content }}</router-link>
+                        <router-link :to="'/dautruong/tongquan/'+statusId">{{ statusContentActive[0].content }}</router-link>
                     </a-breadcrumb-item>
                 </a-breadcrumb>
             </BreadcrumbWrapperStyle>
@@ -107,12 +107,12 @@
                     </article>
 
                         <h3>Các giải đấu đang diễn ra</h3>
-                        <a-table :columns="columns" :data-source="data" @change="onChange" >
+                        <a-table :columns="columns" :data-source="dataFilter">
                             <template #bodyCell="{ column, record }">
-                                <template v-if="column.key === 'challenge'">
+                                <template v-if="column.key === 'tournament'">
                                     <a-row align="middle">
-                                        <img src="https://avatars.githubusercontent.com/u/91653024?s=80&v=4" style="width: 40px;height: 40px;border-rafius: 5px; margin-right: 5px;" alt="avatar">
-                                        <p style="margin-bottom: 0;">{{ record.challenge.content }}</p>
+                                        <img src="/src/assets/img/avatar.png" style="width: 40px;height: 40px;border-rafius: 5px; margin-right: 5px;" alt="avatar">
+                                        <p style="margin-bottom: 0;">{{ record.tournament.content }}</p>
                                     </a-row>
                                 </template>
                                 <template v-else-if="column.key === 'attendees'">
@@ -140,7 +140,7 @@
                                           </template>
                                           <a>
                                             <span>
-                                                <img src="/src/assets/img/more-horizonal.svg" >
+                                                <img src="/src/assets/img/more-horizontal-f.png" >
                                             </span>
                                             <down-outlined />
                                           </a>
@@ -164,11 +164,10 @@
     import RightSideBarOverviewChallenge from '@/views/dashboard/overview/RightSideBarOverviewChallenge.vue';
     import { reactive, ref, watch } from 'vue';
     import { useRoute } from 'vue-router';
+    import router from '@/router';
 
     const route = useRoute();
     const statusId = ref(route.params.id);
-    console.log(route.params.id);
-    console.log(route);
 
     const tournamentSelected = ref<number>(1);
     const statusSelected = ref<number>(+statusId.value);
@@ -179,72 +178,51 @@
     const columns = [
         {
             title: 'Giải đấu',
-            dataIndex: 'challenge',
-            key: 'challenge',
+            dataIndex: 'tournament',
+            key: 'tournament',
         },
         {
             title: 'Số người',
             dataIndex: 'attendees',
             key: 'attendees',
             align: 'center',
-            // sorter: {
-            //     compare: (a:any, b:any) => a.attendees.attendees - b.attendees.attendees,
-            //     multiple: 3,
-            // },
         },
         {
             title: 'Ngôn ngữ',
             dataIndex: 'language',
             key: 'language',
             align: 'center',
-            // sorter: {
-            //     compare: (a:any, b:any) => a.language.language - b.language.language,
-            //     multiple: 2,
-            // },
         },
         {
             title: 'Thời gian',
             dataIndex: 'time',
             key: 'time',
             align: 'center',
-            // sorter: {
-            //     compare: (a:any, b:any) => a.time.time - b.time.time,
-            //     multiple: 1,
-            // },
         },
         {
             title: 'Bắt đầu',
             dataIndex: 'timeStart',
             key: 'timeStart',
             align: 'center',
-            // sorter: {
-            //     compare: (a:any, b:any) => a.timeStart.timeStart - b.timeStart.timeStart,
-            //     multiple: 1,
-            // },
         },
         {
             title: 'Elo tối thiều',
             dataIndex: 'elo',
             key: 'elo',
             align: 'center',    
-            // sorter: {
-            //     compare: (a:any, b:any) => a.elo.elo - b.elo.elo,
-            //     multiple: 1,
-            // },
         },
         { 
             title: '', 
             key: 'action' 
         },
     ];
-        
     const data = ref([
         {
             id: 1,
-            challengeId: 3,
-            challenge: {
-                id: 3,
-                content: 'Solo',
+            tournamentId: 2,
+            tournament: {
+                id: 2,
+                content: 'Thử thách cá nhân',
             },
             attendeesId: 6,
             attendees: {
@@ -256,28 +234,29 @@
                 id: 6,
                 language: 'Javascript',
             },
-            timeId: 2,
+            timeId: 3,
             time: {
-                id: 2,
-                time: '60 phút',
+                id: 3,
+                time: '120 phút',
             },
             timeStartId: 2,
             timeStart: {
                 id: 2,
-                timeStart: '15:00 pm',
+                timeStart: '9:30 am',
             },
             eloId: 2,
             elo: {
                 id: 2,
-                elo: 1300
-            }
+                elo: 1250
+            },
+            statusId: 2
         },
         {
             id: 2,
-            challengeId: 3,
-            challenge: {
-                id: 3,
-                content: 'Solo',
+            tournamentId: 2,
+            tournament: {
+                id: 2,
+                content: 'Thử thách cá nhân',
             },
             attendeesId: 6,
             attendees: {
@@ -297,20 +276,21 @@
             timeStartId: 2,
             timeStart: {
                 id: 2,
-                timeStart: '15:00 pm',
+                timeStart: '7:30 am',
             },
             eloId: 2,
             elo: {
                 id: 2,
                 elo: 1300
-            }
+            },
+            statusId: 2
         },
         {
             id: 2,
-            challengeId: 3,
-            challenge: {
-                id: 3,
-                content: 'Solo',
+            tournamentId: 2,
+            tournament: {
+                id: 2,
+                content: 'Thử thách cá nhân',
             },
             attendeesId: 6,
             attendees: {
@@ -330,20 +310,55 @@
             timeStartId: 2,
             timeStart: {
                 id: 2,
-                timeStart: '15:00 pm',
+                timeStart: '7:30 am',
             },
             eloId: 2,
             elo: {
                 id: 2,
                 elo: 1300
-            }
+            },
+            statusId: 2
         },
         {
             id: 2,
-            challengeId: 3,
-            challenge: {
-                id: 3,
-                content: 'Solo',
+            tournamentId: 2,
+            tournament: {
+                id: 2,
+                content: 'Thử thách cá nhân',
+            },
+            attendeesId: 6,
+            attendees: {
+                id: 6,
+                attendees: '50'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'C#',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '7:30 am',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            },
+            statusId: 2
+        },
+        {
+            id: 2,
+            tournamentId: 2,
+            tournament: {
+                id: 2,
+                content: 'Thử thách cá nhân',
             },
             attendeesId: 6,
             attendees: {
@@ -363,64 +378,66 @@
             timeStartId: 2,
             timeStart: {
                 id: 2,
-                timeStart: '15:00 pm',
+                timeStart: '17:30 pm',
             },
             eloId: 2,
             elo: {
                 id: 2,
                 elo: 1300
-            }
+            },
+            statusId: 2
         },
         {
             id: 2,
-            challengeId: 3,
-            challenge: {
-                id: 3,
-                content: 'Solo',
+            tournamentId: 2,
+            tournament: {
+                id: 2,
+                content: 'Thử thách cá nhân',
             },
-            attendeesId: 6,
+            attendeesId: 2,
             attendees: {
-                id: 6,
-                attendees: '50'
-            },
-            languageId: 6,
-            language: {
-                id: 6,
-                language: 'Java',
-            },
-            timeId: 2,
-            time: {
                 id: 2,
-                time: '60 phút',
-            },
-            timeStartId: 2,
-            timeStart: {
-                id: 2,
-                timeStart: '15:00 pm',
-            },
-            eloId: 2,
-            elo: {
-                id: 2,
-                elo: 1300
-            }
-        },
-        {
-            id: 2,
-            challengeId: 3,
-            challenge: {
-                id: 3,
-                content: 'Solo',
-            },
-            attendeesId: 6,
-            attendees: {
-                id: 6,
-                attendees: '50'
+                attendees: '5'
             },
             languageId: 6,
             language: {
                 id: 6,
                 language: 'PHP',
             },
+            timeId: 3,
+            time: {
+                id: 3,
+                time: '120 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '8:30 am',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            },
+            statusId: 2
+        },
+        {
+            id: 2,
+            tournamentId: 3,
+            tournament: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 6,
+            attendees: {
+                id: 6,
+                attendees: '50'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'C#',
+            },
             timeId: 2,
             time: {
                 id: 2,
@@ -435,12 +452,13 @@
             elo: {
                 id: 2,
                 elo: 1300
-            }
+            },
+            statusId: 3
         },
         {
             id: 2,
-            challengeId: 3,
-            challenge: {
+            tournamentId: 3,
+            tournament: {
                 id: 3,
                 content: 'Solo',
             },
@@ -468,12 +486,115 @@
             elo: {
                 id: 2,
                 elo: 1300
-            }
+            },
+            statusId: 2
         },
         {
             id: 2,
-            challengeId: 3,
-            challenge: {
+            tournamentId: 3,
+            tournament: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 2,
+            attendees: {
+                id: 2,
+                attendees: '5'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'Java',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '15:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1350
+            },
+            statusId: 2
+        },
+        {
+            id: 2,
+            tournamentId: 3,
+            tournament: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 3,
+            attendees: {
+                id: 3,
+                attendees: '10'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'PHP',
+            },
+            timeId: 4,
+            time: {
+                id: 4,
+                time: '180 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '16:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1200
+            },
+            statusId: 2
+        },
+        {
+            id: 2,
+            tournamentId: 3,
+            tournament: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 6,
+            attendees: {
+                id: 6,
+                attendees: '50'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'Java',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '15:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            },
+            statusId: 3
+        },
+        {
+            id: 2,
+            tournamentId: 3,
+            tournament: {
                 id: 3,
                 content: 'Solo',
             },
@@ -501,12 +622,13 @@
             elo: {
                 id: 2,
                 elo: 1300
-            }
+            },
+            statusId: 4
         },
         {
             id: 2,
-            challengeId: 3,
-            challenge: {
+            tournamentId: 3,
+            tournament: {
                 id: 3,
                 content: 'Solo',
             },
@@ -520,10 +642,10 @@
                 id: 6,
                 language: 'C#',
             },
-            timeId: 2,
+            timeId: 4,
             time: {
-                id: 2,
-                time: '60 phút',
+                id: 4,
+                time: '180 phút',
             },
             timeStartId: 2,
             timeStart: {
@@ -534,12 +656,13 @@
             elo: {
                 id: 2,
                 elo: 1300
-            }
+            },
+            statusId: 5
         },
         {
             id: 2,
-            challengeId: 3,
-            challenge: {
+            tournamentId: 3,
+            tournament: {
                 id: 3,
                 content: 'Solo',
             },
@@ -567,12 +690,13 @@
             elo: {
                 id: 2,
                 elo: 1300
-            }
+            },
+            statusId: 2
         },
         {
             id: 2,
-            challengeId: 3,
-            challenge: {
+            tournamentId: 3,
+            tournament: {
                 id: 3,
                 content: 'Solo',
             },
@@ -600,7 +724,246 @@
             elo: {
                 id: 2,
                 elo: 1300
-            }
+            },
+            statusId: 2
+        },
+        {
+            id: 2,
+            tournamentId: 3,
+            tournament: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 6,
+            attendees: {
+                id: 6,
+                attendees: '50'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'Java',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '15:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            },
+            statusId: 2
+        },
+        {
+            id: 2,
+            tournamentId: 3,
+            tournament: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 6,
+            attendees: {
+                id: 6,
+                attendees: '50'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'Java',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '15:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            },
+            statusId: 2
+        },
+        {
+            id: 2,
+            tournamentId: 3,
+            tournament: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 3,
+            attendees: {
+                id: 3,
+                attendees: '10',
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'Javascript',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 1,
+            timeStart: {
+                id: 1,
+                timeStart: '14:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1100
+            },
+            statusId: 2
+        },
+        {
+            id: 2,
+            tournamentId: 3,
+            tournament: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 6,
+            attendees: {
+                id: 6,
+                attendees: '50'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'Java',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '15:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            },
+            statusId: 3
+        },
+        {
+            id: 2,
+            tournamentId: 2,
+            tournament: {
+                id: 2,
+                content: 'Thử thách cá nhân',
+            },
+            attendeesId: 6,
+            attendees: {
+                id: 6,
+                attendees: '50'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'Java',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '15:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            },
+            statusId: 5
+        },
+        {
+            id: 2,
+            tournamentId: 3,
+            tournament: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 6,
+            attendees: {
+                id: 6,
+                attendees: '50'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'Java',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '15:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            },
+            statusId: 2
+        },
+        {
+            id: 2,
+            tournamentId: 3,
+            tournament: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 3,
+            attendees: {
+                id: 3,
+                attendees: '10',
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'Java',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '15:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            },
+            statusId: 5
         },
     ]);
 
@@ -705,7 +1068,6 @@
         },
     ])
     const topRanking = ref(dataRanking.sort((a, b) => b.elo - a.elo).slice(0,10))
-
     const optionTournaments = reactive([
         {
             id: 1,
@@ -718,13 +1080,9 @@
         {
             id: 3,
             content: 'Solo',
-        }
+        },
     ])
     const optionStatus = reactive([
-        {
-            id: 1,
-            content: 'Tất cả',
-        },
         {
             id: 2,
             content: 'Đang diễn ra',
@@ -787,21 +1145,25 @@
         },
     ])
 
-    const statusContentActive = ref(optionStatus.filter((item:any) => item.id == statusId));
+    const statusContentActive = ref(optionStatus.filter((item:any) => item.id == statusSelected.value));
+    
+    watch(statusSelected, (newVal, oldVal) => {
+        router.push({name: 'overviewChallengeDetail', params: {id: statusSelected.value}});
+        statusContentActive.value = optionStatus.filter((item:any) => item.id == statusSelected.value);
+    })
 
-    const dataFilter = ref(data.value.filter(item => item.challengeId === tabActive.value));
-
+    const dataFilter = ref(data.value.filter(item => item.statusId === statusSelected.value));
     const handleFilterData = () => {
-        // dataFilter.value = data.value.filter(item => item.tournamentId === tabActive.value);
-        // if(statusSelected.value != 1) {            
-        //     dataFilter.value = dataFilter.value.filter(item => item.status === statusSelected.value);
-        // }
-        // if(timeSelected.value != 1) {
-        //     dataFilter.value = dataFilter.value.filter(item => item.timeId === timeSelected.value);
-        // }
-        // if(attendeSelected.value != 1) {
-        //     dataFilter.value = dataFilter.value.filter(item => item.attendeesId === attendeSelected.value);
-        // }
+        dataFilter.value = data.value.filter(item => item.statusId === statusSelected.value);
+        if(tournamentSelected.value != 1) {
+            dataFilter.value = dataFilter.value.filter(item => item.tournamentId === tournamentSelected.value);
+        }
+        if(timeSelected.value != 1) {
+            dataFilter.value = dataFilter.value.filter(item => item.timeId === timeSelected.value);
+        }
+        if(attendeSelected.value != 1) {
+            dataFilter.value = dataFilter.value.filter(item => item.attendeesId === attendeSelected.value);
+        }
     }
 
     const handleChangeTournament = (value: number) => {
@@ -822,186 +1184,190 @@
         tournamentSelected.value = tabActive.value;
         handleFilterData();
     });
-
 </script>
 
 <style scoped>
-#overview-challenge-Detail-container {
+#overview-tournament-Detail-container {
     padding: 30px 0 30px 30px ;
 }
-
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > div > div > div > table > tbody > tr > td) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > div > div > div > table > tbody > tr > td) {
     padding: 8px 15px;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div > div > div > div > table > tbody > tr > td > div > p) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div > div > div > div > table > tbody > tr > td > div > p) {
     margin-bottom: 0;
     align-self: center;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info) {
     padding-bottom: 5px;
     margin-bottom: 10px;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
     font-size: 15px;
     font-weight: 500;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div > div),
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div),
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div > div),
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div),
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div) {
     width: 100%;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div > div > div) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > div > div > div > div) {
     border-radius: 8px;
 }
-:global(#overview-challenge-Detail-container > div) {
+:global(#overview-tournament-Detail-container > div) {
     margin-top: 30px;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2)) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2)) {
     margin-top: 24px;   
 }
 
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label) {
     background: #dadada;
     border-radius: 15px;
     border: none;
     width: 150px;
     text-align: center;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label:hover) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label:hover) {
     color: #000000;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div) {
     border-radius: 15px;
     background: #dadada;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span:nth-child(2)) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span:nth-child(2)) {
     font-weight: 500;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked) {
     outline: none;
     border: none;
     background: #ffffff;
     Padding: 8px, 24px, 8px, 24px;
     border-radius: 15px;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span:nth-child(2)) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span:nth-child(2)) {
     color: #000000;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label::before) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label::before) {
     display:none;
 }
 :global(#app > div > div > section > section > section > main > main) {
     background: #f2f2f2;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div) {
     position: relative;
     height: 300px;    
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div > img) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div > img) {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3)) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3)) {
     margin-top: 20px;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li) {
     border: none;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(1)) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(1)) {
     display: flex;
     align-items: center;
     padding: 0 10px 0 15px !important;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div) {
     padding-left: 12px;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div > p) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div > p) {
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 700;
     color: #344767;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div > span:nth-child(3)) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(2) > div > div > span:nth-child(3)) {
     color: #344767;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div > div > div > span:nth-child(2)) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div > div > div > span:nth-child(2)) {
     padding-right: 4px;
     color: #4CAF50;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info > div > h1 > p) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info > div > h1 > p) {
     text-transform: initial;
     font-size: 20px;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div) {
     border-radius: 35px;
     overflow: hidden;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div) {
     margin-bottom: 0 !important;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7) {
     padding-right: 0 !important;
 }
-:global(#overview-challenge-Detail-container > div) {
+:global(#overview-tournament-Detail-container > div) {
     margin-right: 0 !important;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info > div > span) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article.user-info > div > span) {
     height: fit-content;
     font-size: 16px;
     color: #3895FF;
     cursor: pointer;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked),
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked > input),
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked > span),
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button > input),
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button > span),
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button:focus) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked),
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked > input),
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label.ant-radio-button-wrapper.ant-radio-button-wrapper-checked > span.ant-radio-button.ant-radio-button-checked > span),
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button > input),
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button > span),
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label > span.ant-radio-button:focus) {
     border: none !important;
     box-shadow: unset !important;
     outline: none !important;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > div) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > ul > li.ant-pagination-item.ant-pagination-item-active) {
+    background-color: #21498c !important;
+}
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > div) {
     border-radius: 8px;
     overflow: hidden;
     min-height: 623px;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17  > div > div > div > div > div > div > table > thead > tr > th) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > h1 > p) {
+    margin-bottom: 5px;
+}
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17  > div > div > div > div > div > div > table > thead > tr > th) {
     background: #EB763C;
     color: #ffffff;
     text-align: center;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > ul) {
+:global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > ul) {
     justify-content: center !important;
     margin-top: 15px !important;
 }
 @media only screen and (min-width:1000px) and (max-width: 1372px) {
-    :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
+    :global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
         font-size: 14px;
     }
 }
-@media only screen and (min-width:768px) and (max-width: 1000px) {
-    :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > h3) {
-        margin-top: 10px;
-    }
-    :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div) {
-        height: 290px;    
-    }
-}
+
 @media screen and (max-width:768px){
-    :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(1) > div > div > h1 > p) {
+    :global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > h3) {
+        margin-top: 15px;
+    }
+    :global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > div > div > div > table > tbody > tr > td > div > img){
+        width: 34px !important;
+        height: 34px !important;
+    }
+    :global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(1) > div > div > h1 > p) {
         margin-bottom: 6px;
     }
-    :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label) {
+    :global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(2) > div > div > div > label) {
         width: unset;
     }
-    #overview-challenge-Detail-container {
+    #overview-tournament-Detail-container {
         padding-left: 15px;
     }
-    :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(1)) {
+    :global(#overview-tournament-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li > div > div > div > div:nth-child(1)) {
         padding: 0 20px 0 25px !important;
     }
 }
