@@ -106,12 +106,12 @@
                         </a-row>
                     </article>
 
-                    <article>
+                        <h3>Các giải đấu đang diễn ra</h3>
                         <a-table :columns="columns" :data-source="data" @change="onChange" >
                             <template #bodyCell="{ column, record }">
                                 <template v-if="column.key === 'challenge'">
                                     <a-row align="middle">
-                                        <img src="https://avatars.githubusercontent.com/u/91653024?s=80&v=4" style="width: 40px;height: 40px;border-rafius: 5px; margin-right: 5px;" alt="">
+                                        <img src="https://avatars.githubusercontent.com/u/91653024?s=80&v=4" style="width: 40px;height: 40px;border-rafius: 5px; margin-right: 5px;" alt="avatar">
                                         <p style="margin-bottom: 0;">{{ record.challenge.content }}</p>
                                     </a-row>
                                 </template>
@@ -130,10 +130,26 @@
                                 <template v-else-if="column.key === 'elo'">
                                     {{ record.elo.elo }}
                                 </template>
+                                <template v-else-if="column.key === 'action'">
+                                    <span class="table-operation">
+                                        <a-dropdown>
+                                          <template #overlay>
+                                            <a-menu>
+                                              <a-menu-item>Chi tiết</a-menu-item>
+                                            </a-menu>
+                                          </template>
+                                          <a>
+                                            <span>
+                                                <img src="/src/assets/img/more-horizonal.svg" >
+                                            </span>
+                                            <down-outlined />
+                                          </a>
+                                        </a-dropdown>
+                                      </span>
+                                </template>
                             </template>
                             
                         </a-table>
-                    </article>
                 </a-col>
     
                 <a-col :xxl="7" :xl="7" :lg="8" :md="24" :xs="24" :sm="24">
@@ -238,7 +254,73 @@
             languageId: 6,
             language: {
                 id: 6,
-                language: 'Java',
+                language: 'Javascript',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '15:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            }
+        },
+        {
+            id: 2,
+            challengeId: 3,
+            challenge: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 6,
+            attendees: {
+                id: 6,
+                attendees: '50'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'C#',
+            },
+            timeId: 2,
+            time: {
+                id: 2,
+                time: '60 phút',
+            },
+            timeStartId: 2,
+            timeStart: {
+                id: 2,
+                timeStart: '15:00 pm',
+            },
+            eloId: 2,
+            elo: {
+                id: 2,
+                elo: 1300
+            }
+        },
+        {
+            id: 2,
+            challengeId: 3,
+            challenge: {
+                id: 3,
+                content: 'Solo',
+            },
+            attendeesId: 6,
+            attendees: {
+                id: 6,
+                attendees: '50'
+            },
+            languageId: 6,
+            language: {
+                id: 6,
+                language: 'C#',
             },
             timeId: 2,
             time: {
@@ -337,7 +419,7 @@
             languageId: 6,
             language: {
                 id: 6,
-                language: 'Java',
+                language: 'PHP',
             },
             timeId: 2,
             time: {
@@ -403,7 +485,7 @@
             languageId: 6,
             language: {
                 id: 6,
-                language: 'Java',
+                language: 'Javascript',
             },
             timeId: 2,
             time: {
@@ -436,7 +518,7 @@
             languageId: 6,
             language: {
                 id: 6,
-                language: 'Java',
+                language: 'C#',
             },
             timeId: 2,
             time: {
@@ -469,73 +551,7 @@
             languageId: 6,
             language: {
                 id: 6,
-                language: 'Java',
-            },
-            timeId: 2,
-            time: {
-                id: 2,
-                time: '60 phút',
-            },
-            timeStartId: 2,
-            timeStart: {
-                id: 2,
-                timeStart: '15:00 pm',
-            },
-            eloId: 2,
-            elo: {
-                id: 2,
-                elo: 1300
-            }
-        },
-        {
-            id: 2,
-            challengeId: 3,
-            challenge: {
-                id: 3,
-                content: 'Solo',
-            },
-            attendeesId: 6,
-            attendees: {
-                id: 6,
-                attendees: '50'
-            },
-            languageId: 6,
-            language: {
-                id: 6,
-                language: 'Java',
-            },
-            timeId: 2,
-            time: {
-                id: 2,
-                time: '60 phút',
-            },
-            timeStartId: 2,
-            timeStart: {
-                id: 2,
-                timeStart: '15:00 pm',
-            },
-            eloId: 2,
-            elo: {
-                id: 2,
-                elo: 1300
-            }
-        },
-        {
-            id: 2,
-            challengeId: 3,
-            challenge: {
-                id: 3,
-                content: 'Solo',
-            },
-            attendeesId: 6,
-            attendees: {
-                id: 6,
-                attendees: '50'
-            },
-            languageId: 6,
-            language: {
-                id: 6,
-                language: 'Java',
+                language: 'Python',
             },
             timeId: 2,
             time: {
@@ -816,6 +832,10 @@
 #overview-challenge-Detail-container {
     padding: 30px 0 30px 30px ;
 }
+
+:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > div > div > div > table > tbody > tr > td) {
+    padding: 8px 15px;
+}
 :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div > div > div > div > table > tbody > tr > td > div > p) {
     margin-bottom: 0;
     align-self: center;
@@ -888,7 +908,7 @@
     bottom: 0;
 }
 :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3)) {
-    margin-top: 25px;
+    margin-top: 20px;
 }
 :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-8.ant-col-xl-7.ant-col-xxl-7 > div > div > div > div > article:nth-child(2) > div > div > div > ul > li) {
     border: none;
@@ -947,14 +967,19 @@
     box-shadow: unset !important;
     outline: none !important;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div > div) {
+:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > div) {
     border-radius: 8px;
     overflow: hidden;
+    min-height: 623px;
 }
-:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article:nth-child(3) > div > div > div > div > div > div > table > thead > tr > th) {
+:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17  > div > div > div > div > div > div > table > thead > tr > th) {
     background: #EB763C;
     color: #ffffff;
     text-align: center;
+}
+:global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > div > div > div > ul) {
+    justify-content: center !important;
+    margin-top: 15px !important;
 }
 @media only screen and (min-width:1000px) and (max-width: 1372px) {
     :global(#overview-challenge-Detail-container > div > div.ant-col.ant-col-xs-24.ant-col-sm-24.ant-col-md-24.ant-col-lg-16.ant-col-xl-17.ant-col-xxl-17 > article > div > div > h1) {
